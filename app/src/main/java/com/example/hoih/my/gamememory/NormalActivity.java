@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class NormalActivity extends Activity {
 
+    TextView txtIconBack;
     ListView levelListView;
     ArrayList<Level> levelData = new ArrayList<>();
 
@@ -22,6 +23,14 @@ public class NormalActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_normal);
         levelListView = (ListView)findViewById(R.id.listView);
+        txtIconBack = (TextView)findViewById(R.id.txt_icon_back);
+
+        txtIconBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         levelData = getData();
 
