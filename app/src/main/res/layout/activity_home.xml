@@ -43,7 +43,7 @@
             android:background="@drawable/btn_music"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"/>
         <Button
@@ -54,7 +54,7 @@
             android:background="@drawable/btn_music"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:onClick="onNormal"
             android:layout_marginBottom="10dp"/>
         <Button
@@ -65,7 +65,7 @@
             android:background="@drawable/btn_music"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:layout_marginBottom="5dp"/>
     </LinearLayout>
 
@@ -82,21 +82,21 @@
         android:background="@drawable/area_footer">
         <Button
             android:id="@+id/btn_share"
-            android:layout_width="120dp"
+            android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:text="SHARE"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:background="@drawable/btn_music"
             android:layout_alignParentLeft="true"
             android:textColor="#fff"/>
         <Button
             android:id="@+id/btn_moreGame"
-            android:layout_width="120dp"
+            android:layout_width="129dp"
             android:layout_height="wrap_content"
             android:text="MORE GAMES"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:background="@drawable/btn_music"
             android:layout_alignParentRight="true"
             android:textColor="#fff"/>

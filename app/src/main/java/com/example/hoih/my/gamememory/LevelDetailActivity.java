@@ -17,6 +17,6 @@ public class LevelDetailActivity extends Activity {
 
         Button btnLevel = (Button)findViewById(R.id.btn_level);
 
-        btnLevel.setText("Level" + level);
+        btnLevel.setText(level);
     }
 }
