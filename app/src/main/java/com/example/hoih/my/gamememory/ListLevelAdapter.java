@@ -14,16 +14,16 @@ public class ListLevelAdapter extends BaseAdapter {
 
     private Context mContext;
 
-    private ArrayList<Level> listLevel = new ArrayList<>();
+    private ArrayList<Level> levelData = new ArrayList<>();
 
-    public ListLevelAdapter(Context context, ArrayList<Level> m) {
+    public ListLevelAdapter(Context context, ArrayList<Level> level) {
         mContext = context;
-        listLevel = m;
+        levelData = level;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return levelData.size();
     }
 
     @Override
@@ -41,11 +41,9 @@ public class ListLevelAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.activity_level_detail, parent, false);
+        View rowView = inflater.inflate(R.layout.item_level, parent, false);
 
         Button btnLevel = (Button)rowView.findViewById(R.id.btn_level);
-
-        btnLevel.setText(listLevel.get(position).getLevel());
 
         return rowView;
     }

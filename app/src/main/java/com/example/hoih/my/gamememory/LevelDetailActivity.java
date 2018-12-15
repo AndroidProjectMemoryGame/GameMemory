@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class LevelDetailActivity extends Activity {
 
@@ -12,10 +13,10 @@ public class LevelDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_detail);
 
-        int level = getIntent().getIntExtra("level", 0);
+        String level = getIntent().getIntExtra("level",0)+"";
 
         Button btnLevel = (Button)findViewById(R.id.btn_level);
 
-        btnLevel.setText(level);
+        btnLevel.setText("Level" + level);
     }
 }
