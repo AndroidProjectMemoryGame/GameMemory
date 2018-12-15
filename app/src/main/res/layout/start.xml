@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="vertical" android:background="@drawable/background_start" >
+
+<RelativeLayout
+    android:id="@+id/header_screen"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#009788">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageView3"
+        android:textStyle="bold"
+        android:layout_marginEnd="264dp"
+        android:layout_weight="1"
+        android:text="TIME : 0/0 "
+        android:layout_alignRight="@+id/imageView3"
+        android:layout_marginRight="264dp" />
+
+    <view
+        class="android.support.v4.widget.DrawerLayout"
+        id="@+id/view"
+        android:layout_width="19dp"
+        android:layout_height="13dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="9dp"
+        android:layout_toStartOf="@+id/textView12"
+        android:layout_weight="1"
+        android:layout_marginRight="9dp"
+        android:layout_toLeftOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="NO TIME LIMIT" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        tools:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginBottom="26dp"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+</RelativeLayout>
+
+<LinearLayout
+    android:id="@+id/content_screen"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="150dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-5dp"
+        android:layout_marginLeft="150dp"
+        android:textFontWeight="Bold"
+        android:layout_weight="1"
+        android:text="TIME: NO TIME LIMIT" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-5dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="100dp"
+        android:text="
+            You have 5 seconds to
+            rememorize all images" />
+
+    <Button
+        android:layout_width="105dp"
+        android:textSize="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="158dp"
+        android:layout_marginBottom="10dp"
+        android:text="GO"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background="@color/colorAccent"
+        />
+</LinearLayout>
+
+</LinearLayout>
