@@ -18,8 +18,6 @@
         </activity>
         <activity android:name=".NormalActivity" />
         <activity android:name=".GameActivity"></activity>
-
-     
     </application>
 
 </manifest>
