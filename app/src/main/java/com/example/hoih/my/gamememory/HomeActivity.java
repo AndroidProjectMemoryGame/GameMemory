@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class HomeActivity extends Activity {
 
-    Button btnNormal, btnNoLimitTime;
+    Button btnNormal, btnNoLimitTime, btnHard;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -17,22 +17,31 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.activity_home);
         btnNormal = (Button)findViewById(R.id.btn_normal);
         btnNoLimitTime = (Button)findViewById(R.id.btn_no_limit_time);
-
-        btnNormal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(HomeActivity.this, NormalActivity.class);
-                startActivity(i);
-            }
-        });
+        btnHard = (Button)findViewById(R.id.btn_hard);
 
         btnNoLimitTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(HomeActivity.this, NormalActivity.class);
+                Intent i = new Intent(HomeActivity.this, ModeActivity.class);
+                i.putExtra("mode", "1");
                 startActivity(i);
             }
         });
-
+        btnNormal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, ModeActivity.class);
+                i.putExtra("mode", "2");
+                startActivity(i);
+            }
+        });
+        btnHard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, ModeActivity.class);
+                i.putExtra("mode", "3");
+                startActivity(i);
+            }
+        });
     }
 }
