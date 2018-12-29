@@ -1,17 +1,21 @@
 package com.example.hoih.my.gamememory;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ModeActivity extends Activity {
+public class ModeActivity extends Activity implements ListLevelAdapter.OnClickListener{
 
     TextView txtIconBack, txtMode;
     ListView levelListView;
@@ -32,19 +36,12 @@ public class ModeActivity extends Activity {
             }
         });
 
-        if (getIntent() != null) {
-            if (getIntent().getStringExtra("mode").equals("1")) {
-                txtMode.setText("No Limit Time");
-            } else if (getIntent().getStringExtra("mode").equals("2")) {
-                txtMode.setText("Normal");
-            } else {
-                txtMode.setText("Hard");
-            }
-        }
+        getMode();
+
 
         levelData = getData();
 
-        final ListLevelAdapter adapter = new ListLevelAdapter(this, levelData);
+        final ListLevelAdapter adapter = new ListLevelAdapter(this, levelData,this);
         levelListView.setAdapter(adapter);
 
         levelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,5 +67,61 @@ public class ModeActivity extends Activity {
         data.add(new Level(9));
         data.add(new Level(10));
         return data;
+    }
+
+    @Override
+    public void Levell(int position) {
+
+        if (getIntent() != null) {
+            if (getIntent().getStringExtra("mode").equals("1")) {
+                showNotice(this,"You have 5 seconds to rememorize all images!","TIME:  NO TIME LIMIT");
+            } else if (getIntent().getStringExtra("mode").equals("2")) {
+                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
+            } else {
+                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
+            }
+        }
+
+    }
+
+    public void showNotice(Context context, String message, String title) {
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    context);
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.dialog_start_game, null);
+            alertDialogBuilder.setView(view);
+            alertDialogBuilder.setCancelable(false);
+            final AlertDialog dialog = alertDialogBuilder.create();
+            Button btnGo = (Button) view.findViewById(R.id.btn_go);
+            TextView txvMessage = (TextView) view.findViewById(R.id.txv_message);
+            TextView txvTitle = (TextView) view.findViewById(R.id.txv_title);
+            txvMessage.setText(message);
+            txvTitle.setText(title);
+            btnGo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                    Intent i = new Intent(ModeActivity.this, GameActivity.class);
+                    startActivity(i);
+                }
+            });
+            //   txtMessage.setText(message);
+            if (context instanceof Activity && !((Activity) context).isFinishing())
+                dialog.show();
+        }
+    }
+
+    public void getMode(){
+        if (getIntent() != null) {
+            if (getIntent().getStringExtra("mode").equals("1")) {
+                txtMode.setText("No Limit Time");
+            } else if (getIntent().getStringExtra("mode").equals("2")) {
+                txtMode.setText("Normal");
+            } else {
+                txtMode.setText("Hard");
+            }
+        }
     }
 }
