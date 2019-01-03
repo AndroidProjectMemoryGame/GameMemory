@@ -1,8 +1,10 @@
 package com.example.hoih.my.gamememory;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity {
 
     ListView mListView;
+    int i;
 
     ArrayList<Drawable> mData = new ArrayList<>();
 
@@ -24,7 +27,10 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ListGameAdapter(this));
+        Intent intent = getIntent();
+        i = Integer.parseInt(intent.getStringExtra("pos"));
+        Log.d("MISSION", "Number : " + i + " : succeed2 = "  );
+        gridview.setAdapter(new ListGameAdapter(this,i));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
@@ -35,6 +41,8 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
 }

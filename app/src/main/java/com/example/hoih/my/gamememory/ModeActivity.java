@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,17 +75,17 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
 
         if (getIntent() != null) {
             if (getIntent().getStringExtra("mode").equals("1")) {
-                showNotice(this,"You have 5 seconds to rememorize all images!","TIME:  NO TIME LIMIT");
+                showNotice(this,"You have 5 seconds to rememorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
             } else if (getIntent().getStringExtra("mode").equals("2")) {
-                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
+                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s", String.valueOf(position));
             } else {
-                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
+                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s",String.valueOf(position));
             }
         }
 
     }
 
-    public void showNotice(Context context, String message, String title) {
+    public void showNotice(Context context, String message, String title, final String position) {
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     context);
@@ -104,7 +105,9 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                 public void onClick(View v) {
                     dialog.cancel();
                     Intent i = new Intent(ModeActivity.this, GameActivity.class);
+                    i.putExtra("pos", position);
                     startActivity(i);
+                    Log.d("MISSION", "Number : " + position + " : succeed1 = "  );
                 }
             });
             //   txtMessage.setText(message);

@@ -2,6 +2,7 @@ package com.example.hoih.my.gamememory;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +12,27 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+import static android.content.Intent.getIntent;
+
 public class ListGameAdapter  extends BaseAdapter {
     private boolean loadAll = false;
     private Context mContext;
+    int  pos1;
 
-    public ListGameAdapter(Context c) {
+    public ListGameAdapter(Context c,int pos ) {
         mContext = c;
+        pos1 = pos+1;
     }
     public void setTrue(){
         loadAll = true;
     }
     public int getCount() {
-        return 9;
 
+        Log.d("MISSION", "Number : " + pos1 + " : succeed5 = "  );
+
+        return (pos1+1)*3;
     }
-
     public Object getItem(int position) {
         return null;
     }
@@ -40,7 +47,15 @@ public class ListGameAdapter  extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
+            if(pos1 <4){
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
+            }
+
+            else if(pos1 == 4){
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(170, 170));
+            }
+            else imageView.setLayoutParams(new ViewGroup.LayoutParams(130, 130));
+
             imageView.setBackgroundResource(R.drawable.border_game);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(4, 4, 4, 4);

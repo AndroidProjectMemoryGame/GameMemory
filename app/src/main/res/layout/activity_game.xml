@@ -25,6 +25,7 @@
             android:horizontalSpacing="25dp"
             android:stretchMode="columnWidth"
             android:layout_gravity="center"
+            android:gravity="center_horizontal"
             />
     </LinearLayout>
 
