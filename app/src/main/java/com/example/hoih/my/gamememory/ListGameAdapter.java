@@ -48,13 +48,13 @@ public class ListGameAdapter  extends BaseAdapter {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
             if(pos1 <4){
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
             }
 
             else if(pos1 == 4){
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(170, 170));
+                imageView.setLayoutParams(new ViewGroup.LayoutParams(140, 140));
             }
-            else imageView.setLayoutParams(new ViewGroup.LayoutParams(130, 130));
+            else imageView.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
 
             imageView.setBackgroundResource(R.drawable.border_game);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

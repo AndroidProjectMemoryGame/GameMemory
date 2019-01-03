@@ -9,12 +9,69 @@
     android:layout_gravity="center_horizontal"
     >
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:background="#009788"
+        >
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_back"
+            android:background="#009788"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="TIME:"
+            android:layout_weight="1"
+            android:textSize="15dp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0/0"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textSize="15dp"/>
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="NO TIME LIMIT"
+            android:layout_weight="3"
+            android:textSize="15dp"/>
+        <ImageButton
+            android:layout_gravity=""
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_music"
+            android:background="#009788"
+            />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_menu"
+            android:background="#009788"
+            />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_height="wrap_content" />
+    <LinearLayout
         android:layout_width="350dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         >
+
         <GridView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/gridview"
             android:layout_width="wrap_content"
