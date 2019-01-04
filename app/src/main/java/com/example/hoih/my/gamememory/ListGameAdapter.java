@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static android.content.ContentValues.TAG;
 import static android.content.Intent.getIntent;
@@ -28,10 +29,12 @@ public class ListGameAdapter  extends BaseAdapter {
         loadAll = true;
     }
     public int getCount() {
-
+        Log.d("MISSION", "Number : " +   mThumbIds.length + " : succeed5 = "  );
         Log.d("MISSION", "Number : " + pos1 + " : succeed5 = "  );
 
         return (pos1+1)*3;
+
+
     }
     public Object getItem(int position) {
         return null;
