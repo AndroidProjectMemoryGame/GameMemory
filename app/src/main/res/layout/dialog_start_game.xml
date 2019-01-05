@@ -29,7 +29,7 @@
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:gravity="center"
-        android:text="You have 5 seconds to rememorize all images!"
+        android:text="You have 5 seconds to memorize all images!"
         android:layout_gravity="center"/>
     <Button
         android:id="@+id/btn_go"

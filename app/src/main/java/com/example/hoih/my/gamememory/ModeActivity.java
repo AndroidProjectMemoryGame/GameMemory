@@ -20,6 +20,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     TextView txtIconBack, txtMode;
     ListView levelListView;
     ArrayList<Level> levelData = new ArrayList<>();
+    int levelSelected;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,11 +73,44 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     public void selectLevel(int position) {
         if (getIntent() != null) {
             if (getIntent().getStringExtra("mode").equals("1")) {
-                showNotice(this,"You have 5 seconds to memorize all images!","TIME:  NO TIME LIMIT");
+                if(position == 0 || position == 1 || position == 2) {
+                    levelSelected = 5;
+                    showNotice(this,"You have 5 seconds to memorize all images!","TIME:  NO TIME LIMIT");
+                }
+                if (position == 3 || position == 4 || position == 5) {
+                    levelSelected = 7;
+                    showNotice(this,"You have 7 seconds to memorize all images!","TIME:  NO TIME LIMIT");
+                }
+                if (position == 6 || position == 7 || position == 8 || position == 9) {
+                    levelSelected = 10;
+                    showNotice(this,"You have 10 seconds to memorize all images!","TIME:  NO TIME LIMIT");
+                }
             } else if (getIntent().getStringExtra("mode").equals("2")) {
-                showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
+                if(position == 0 || position == 1 || position == 2) {
+                    levelSelected = 5;
+                    showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
+                }
+                if (position == 3 || position == 4 || position == 5) {
+                    levelSelected = 7;
+                    showNotice(this,"You have 7 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
+                }
+                if (position == 6 || position == 7 || position == 8 || position == 9) {
+                    levelSelected = 10;
+                    showNotice(this,"You have 10 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
+                }
             } else {
-                showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
+                if(position == 0 || position == 1 || position == 2) {
+                    levelSelected = 5;
+                    showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
+                }
+                if (position == 3 || position == 4 || position == 5) {
+                    levelSelected = 7;
+                    showNotice(this,"You have 7 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
+                }
+                if (position == 6 || position == 7 || position == 8 || position == 9) {
+                    levelSelected = 10;
+                    showNotice(this,"You have 10 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
+                }
             }
         }
     }
@@ -104,6 +138,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                 public void onClick(View v) {
                     dialog.cancel();
                     Intent i = new Intent(ModeActivity.this, GameActivity.class);
+                    i.putExtra("levelSelected", levelSelected);
                     startActivity(i);
                 }
             });
@@ -116,8 +151,8 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     public void getMode(){
         if (getIntent() != null) {
             if (getIntent().getStringExtra("mode").equals("1")) {
-            } else if (getIntent().getStringExtra("mode").equals("2")) {
                 txtMode.setText("No Limit Time");
+            } else if (getIntent().getStringExtra("mode").equals("2")) {
                 txtMode.setText("Normal");
             } else {
                 txtMode.setText("Hard");

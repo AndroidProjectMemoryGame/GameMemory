@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#CCFFFF"
-    >
+    android:background="#CCFFFF">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,6 +20,7 @@
             android:background="#009788"
             />
         <TextView
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="TIME:"
@@ -31,25 +31,45 @@
             android:gravity="center"/>
 
         <TextView
+            android:id="@+id/tv_second_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="0"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
             android:id="@+id/txt_time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="0/0"
+            android:text="/"
             android:textColor="#fff"
-            android:layout_weight="2"
+            android:textStyle="bold"
             android:gravity="center"
             android:textSize="15dp"/>
         <TextView
-            android:id="@+id/txt_mode"
+            android:id="@+id/tv_second_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_mode_no_limit_time"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="NO TIME LIMIT"
+            android:text="NO LIMIT TIME"
             android:textColor="#fff"
-            android:layout_weight="2"
+            android:layout_weight="4.5"
             android:layout_toRightOf="@+id/txt_time"
             android:layout_toLeftOf="@+id/btn_music"
-            android:textSize="13dp"/>
+            android:textSize="14dp"/>
         <ImageButton
             android:id="@+id/btn_music"
             android:layout_gravity="center"
@@ -57,7 +77,8 @@
             android:layout_height="40dp"
             android:src="@drawable/icon_music"
             android:background="#009788"
-            android:layout_toRightOf="@+id/txt_mode"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/txt_mode_no_limit_time"
             />
     </LinearLayout>
 
@@ -65,9 +86,10 @@
         android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
         style="?android:attr/progressBarStyleHorizontal"
          />
     <LinearLayout
@@ -76,8 +98,6 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
