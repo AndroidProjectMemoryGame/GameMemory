@@ -61,6 +61,15 @@
             android:text="MATCH 2"
             android:textColor="#009788"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txt_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/btn_help"
+            android:layout_toRightOf="@id/txt_match2"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="4dp"
+            android:onClick="help_event"/>
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"

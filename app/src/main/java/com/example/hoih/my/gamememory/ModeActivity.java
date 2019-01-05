@@ -19,6 +19,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
 
     TextView txtIconBack, txtMode;
     ListView levelListView;
+    Button btnHelp;
     ArrayList<Level> levelData = new ArrayList<>();
 
     @Override
@@ -28,6 +29,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         levelListView = (ListView)findViewById(R.id.listView);
         txtIconBack = (TextView)findViewById(R.id.txt_icon_back);
         txtMode = (TextView)findViewById(R.id.txt_mode);
+        btnHelp = (Button)findViewById(R.id.bt_help);
 
         txtIconBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,14 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                 i.putExtra("level",levelData.get(position).getLevel());
                 startActivity(i);
             }
+        });
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+
+
         });
     }
 
