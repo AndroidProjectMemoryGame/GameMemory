@@ -65,7 +65,7 @@ public class GameActivity extends AppCompatActivity {
 
             public void onFinish() {
                 tv_second_left.setText("0");
-                
+
                 // chưa xong
                 isCountDownFinish = true;
                 if (isCountDownFinish == true) {
