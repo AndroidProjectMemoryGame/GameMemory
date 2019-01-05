@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 import static android.content.ContentValues.TAG;
 import static android.content.Intent.getIntent;
@@ -20,19 +21,27 @@ public class ListGameAdapter  extends BaseAdapter {
     private boolean loadAll = false;
     private Context mContext;
     int  pos1;
+    Random r = new Random();
+    ArrayList<Integer> mang = new ArrayList<>();
+    int random;
+
+    ArrayList<Integer> arrayList = new ArrayList<>();
+
 
     public ListGameAdapter(Context c,int pos ) {
         mContext = c;
         pos1 = pos+1;
+        setData();
+
     }
     public void setTrue(){
         loadAll = true;
     }
     public int getCount() {
         Log.d("MISSION", "Number : " +   mThumbIds.length + " : succeed5 = "  );
-        Log.d("MISSION", "Number : " + pos1 + " : succeed5 = "  );
+        Log.d("MISSION", "Number : " + arrayList.size() + " : thamdaubo = "  );
 
-        return (pos1+1)*3;
+        return arrayList.size();
 
 
     }
@@ -66,32 +75,73 @@ public class ListGameAdapter  extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        int iNew;
+        iNew = r.nextInt((pos1 + 1) * 2);
+
+        random();
+        imageView.setImageResource(arrayList.get(position));
+
+        Log.d("MISSION", "Number : " +   position + " : hihi = "  );
         return imageView;
     }
 
     // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8,
-            R.drawable.card9,
-            R.drawable.card10,
-            R.drawable.card11,
-            R.drawable.card12,
-            R.drawable.card13,
-            R.drawable.card14,
-            R.drawable.card15,
-            R.drawable.card16,
-            R.drawable.card17,
-            R.drawable.card18,
-            R.drawable.card19,
-            R.drawable.card20,
-            R.drawable.card21,
+    // references to our images
+
+    private Integer[] mThumbIds=
+    {
+                R.drawable.card1,
+                R.drawable.card2,
+                R.drawable.card3,
+                R.drawable.card4,
+                R.drawable.card5,
+                R.drawable.card6,
+                R.drawable.card7,
+                R.drawable.card8,
+                R.drawable.card9,
+                R.drawable.card10,
+                R.drawable.card11,
+                R.drawable.card12,
+                R.drawable.card13,
+                R.drawable.card14,
+                R.drawable.card15,
+                R.drawable.card16,
+                R.drawable.card17,
+                R.drawable.card18,
+                R.drawable.card19,
+                R.drawable.card20,
+                R.drawable.card21,
+
     };
+
+        private void setData(){
+            for (int j = 0; j <2; j++) {
+                for (int i = 0; i < ((pos1 + 1) * 2) / 2; i++) {
+                    arrayList.add(mThumbIds[i]);
+                }
+            }
+
+        }
+
+        private  void random() {
+            int iNew;
+            for (int i = 0; i < (pos1 + 1) * 2; i++) {
+                if(i == 0){
+                    iNew = r.nextInt((pos1 + 1) * 2);
+                    random = iNew;
+                    mang.add(iNew);
+                }else{
+                    for (int j = 0; j < i; j++){
+                        iNew = r.nextInt((pos1 + 1) * 2);
+                        mang.add(iNew);
+                        while (iNew == mang.get(j)){
+                            iNew = r.nextInt((pos1 + 1) * 2);
+                        }
+                        random = iNew;
+                    }
+                }
+            }
+            Log.d("MISSION", "Number : " + random + " : testtest = ");
+        }
+
 }

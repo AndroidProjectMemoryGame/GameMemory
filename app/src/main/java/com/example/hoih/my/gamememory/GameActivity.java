@@ -32,6 +32,7 @@ public class GameActivity extends AppCompatActivity {
         Log.d("MISSION", "Number : " + i + " : succeed2 = "  );
         gridview.setAdapter(new ListGameAdapter(this,i));
 
+
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
