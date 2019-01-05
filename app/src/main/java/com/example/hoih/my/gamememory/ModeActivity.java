@@ -24,7 +24,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_normal);
+        setContentView(R.layout.activity_mode);
         levelListView = (ListView)findViewById(R.id.listView);
         txtIconBack = (TextView)findViewById(R.id.txt_icon_back);
         txtMode = (TextView)findViewById(R.id.txt_mode);
@@ -37,7 +37,6 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         });
 
         getMode();
-
 
         levelData = getData();
 
@@ -70,18 +69,16 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     }
 
     @Override
-    public void Levell(int position) {
-
+    public void selectLevel(int position) {
         if (getIntent() != null) {
             if (getIntent().getStringExtra("mode").equals("1")) {
-                showNotice(this,"You have 5 seconds to rememorize all images!","TIME:  NO TIME LIMIT");
+                showNotice(this,"You have 5 seconds to memorize all images!","TIME:  NO TIME LIMIT");
             } else if (getIntent().getStringExtra("mode").equals("2")) {
-                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
+                showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s");
             } else {
-                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
+                showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s");
             }
         }
-
     }
 
     public void showNotice(Context context, String message, String title) {
@@ -90,15 +87,18 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                     context);
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             View view = inflater.inflate(R.layout.dialog_start_game, null);
             alertDialogBuilder.setView(view);
             alertDialogBuilder.setCancelable(false);
+
             final AlertDialog dialog = alertDialogBuilder.create();
             Button btnGo = (Button) view.findViewById(R.id.btn_go);
             TextView txvMessage = (TextView) view.findViewById(R.id.txv_message);
             TextView txvTitle = (TextView) view.findViewById(R.id.txv_title);
             txvMessage.setText(message);
             txvTitle.setText(title);
+
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,8 +116,8 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     public void getMode(){
         if (getIntent() != null) {
             if (getIntent().getStringExtra("mode").equals("1")) {
-                txtMode.setText("No Limit Time");
             } else if (getIntent().getStringExtra("mode").equals("2")) {
+                txtMode.setText("No Limit Time");
                 txtMode.setText("Normal");
             } else {
                 txtMode.setText("Hard");

@@ -26,7 +26,7 @@
             android:layout_marginTop="7dp"
             android:textSize="20dp"
             android:layout_toRightOf="@+id/txt_icon_back"
-            android:layout_toLeftOf="@+id/txt_mode_normal"
+            android:layout_toLeftOf="@+id/txt_mode"
             android:text="Select level"
             android:textStyle="bold"
             android:textColor="#fff" />

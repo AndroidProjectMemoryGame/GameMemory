@@ -15,12 +15,12 @@ public class ListLevelAdapter extends BaseAdapter{
     private Context mContext;
     OnClickListener mListener;
 
-    private ArrayList<Level> levelData = new ArrayList<>();
+    private ArrayList<Level> levelData;
 
-    public ListLevelAdapter(Context context, ArrayList<Level> level, OnClickListener Levell) {
+    public ListLevelAdapter(Context context, ArrayList<Level> level, OnClickListener selectLevel) {
         mContext = context;
         levelData = level;
-        mListener = Levell;
+        mListener = selectLevel;
     }
 
     @Override
@@ -52,15 +52,14 @@ public class ListLevelAdapter extends BaseAdapter{
             @Override
             public void onClick(View view) {
                 if(mListener!= null){
-                    mListener.Levell(position);
+                    mListener.selectLevel(position);
                 }
             }
         });
-
         return rowView;
     }
 
     public interface OnClickListener{
-        void Levell(int position);
+        void selectLevel(int position);
     }
 }
