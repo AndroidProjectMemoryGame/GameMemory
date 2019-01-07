@@ -2,6 +2,7 @@ package com.example.hoih.my.gamememory;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class ListGameAdapter  extends BaseAdapter {
     Random r = new Random();
     ArrayList<Integer> mang = new ArrayList<>();
     int random;
+    int j =0;
 
     ArrayList<Integer> arrayList = new ArrayList<>();
 
@@ -32,6 +34,8 @@ public class ListGameAdapter  extends BaseAdapter {
         mContext = c;
         pos1 = pos+1;
         setData();
+
+        randomArray();
 
     }
     public void setTrue(){
@@ -74,19 +78,11 @@ public class ListGameAdapter  extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
+        imageView.setImageResource(arrayList.get(mang.get(position)));
 
-        int iNew;
-        iNew = r.nextInt((pos1 + 1) * 2);
-
-        random();
-        imageView.setImageResource(arrayList.get(position));
-
-        Log.d("MISSION", "Number : " +   position + " : hihi = "  );
         return imageView;
-    }
 
-    // references to our images
-    // references to our images
+    }
 
     private Integer[] mThumbIds=
     {
@@ -123,25 +119,24 @@ public class ListGameAdapter  extends BaseAdapter {
 
         }
 
-        private  void random() {
-            int iNew;
-            for (int i = 0; i < (pos1 + 1) * 2; i++) {
-                if(i == 0){
-                    iNew = r.nextInt((pos1 + 1) * 2);
-                    random = iNew;
-                    mang.add(iNew);
-                }else{
-                    for (int j = 0; j < i; j++){
-                        iNew = r.nextInt((pos1 + 1) * 2);
-                        mang.add(iNew);
-                        while (iNew == mang.get(j)){
-                            iNew = r.nextInt((pos1 + 1) * 2);
-                        }
-                        random = iNew;
-                    }
-                }
+    public ArrayList<Integer> randomArray() {
+
+        Random rand = new Random();
+        while (mang.size() < (pos1 + 1) * 2) {
+
+            int random = rand.nextInt((pos1 + 1) * 2);
+            if (!mang.contains(random)) {
+                mang.add(random);
             }
-            Log.d("MISSION", "Number : " + random + " : testtest = ");
+            Log.d("MISSION", "Number : " + mang + " : succeed5 = ");
         }
+//        for (int i = 0; i < 8; i++) {
+//            int a = mang.get(i);
+//            Log.d("MISSION", "Number : " + a + " : khanhcute = ");
+//
+//        }
+        return mang;
+    }
+
 
 }
