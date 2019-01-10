@@ -1,22 +1,17 @@
 package com.example.hoih.my.gamememory;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
+import android.content.Intent;
+import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
-
-import static android.content.ContentValues.TAG;
-import static android.content.Intent.getIntent;
 
 public class ListGameAdapter  extends BaseAdapter {
     private boolean loadAll = false;
@@ -25,27 +20,39 @@ public class ListGameAdapter  extends BaseAdapter {
     Random r = new Random();
     ArrayList<Integer> mang = new ArrayList<>();
     int random;
-    int j =0;
+    int dem =0;
 
+    ArrayList<Integer> arrayList1 = new ArrayList<>();
+    ArrayList<Integer> arrayList2 = new ArrayList<>();
+    ArrayList<Integer> arrayList3 = new ArrayList<>();
     ArrayList<Integer> arrayList = new ArrayList<>();
 
 
-    public ListGameAdapter(Context c,int pos ) {
+    public ListGameAdapter(Context c, int pos, ArrayList<Integer> arrayList) {
         mContext = c;
         pos1 = pos+1;
+        arrayList= arrayList;
         setData();
-
         randomArray();
+        if (dem == 1) {
+            compare();
+        }
+        compare();
+
+        Log.d("MISSION", "Number : " + arrayList + " : quangkhanh = "  );
 
     }
+
+
+
     public void setTrue(){
         loadAll = true;
     }
     public int getCount() {
         Log.d("MISSION", "Number : " +   mThumbIds.length + " : succeed5 = "  );
-        Log.d("MISSION", "Number : " + arrayList.size() + " : thamdaubo = "  );
+        Log.d("MISSION", "Number : " + arrayList1.size() + " : thamdaubo = "  );
 
-        return arrayList.size();
+            return arrayList3.size();
 
 
     }
@@ -59,29 +66,29 @@ public class ListGameAdapter  extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        ImageButton buttonView;
+        Log.d("MISSION", "Number : " + arrayList+ " : thamdaubohaha = "  );
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
+            buttonView = new ImageButton(mContext);
             if(pos1 <4){
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
             }
 
             else if(pos1 == 4){
-                imageView.setLayoutParams(new ViewGroup.LayoutParams(140, 140));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(140, 140));
             }
-            else imageView.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
+            else buttonView.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
 
-            imageView.setBackgroundResource(R.drawable.border_game);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(4, 4, 4, 4);
+            buttonView.setBackgroundResource(R.drawable.border_game);
+            buttonView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            buttonView.setPadding(4, 4, 4, 4);
         } else {
-            imageView = (ImageView) convertView;
+            buttonView = (ImageButton) convertView;
         }
-        imageView.setImageResource(arrayList.get(mang.get(position)));
 
-        return imageView;
-
+        buttonView.setImageResource(arrayList3.get(mang.get(position)));
+        return buttonView;
     }
 
     private Integer[] mThumbIds=
@@ -107,20 +114,23 @@ public class ListGameAdapter  extends BaseAdapter {
                 R.drawable.card19,
                 R.drawable.card20,
                 R.drawable.card21,
-
     };
+    private Integer[] test =
+            {
+                    R.drawable.btn_an,
+            };
 
         private void setData(){
             for (int j = 0; j <2; j++) {
                 for (int i = 0; i < ((pos1 + 1) * 2) / 2; i++) {
-                    arrayList.add(mThumbIds[i]);
+                    arrayList1.add(mThumbIds[i]);
+                    arrayList2.add(test[0]);
                 }
             }
 
         }
 
     public ArrayList<Integer> randomArray() {
-
         Random rand = new Random();
         while (mang.size() < (pos1 + 1) * 2) {
 
@@ -128,15 +138,37 @@ public class ListGameAdapter  extends BaseAdapter {
             if (!mang.contains(random)) {
                 mang.add(random);
             }
-            Log.d("MISSION", "Number : " + mang + " : succeed5 = ");
+
         }
 //        for (int i = 0; i < 8; i++) {
 //            int a = mang.get(i);
 //            Log.d("MISSION", "Number : " + a + " : khanhcute = ");
-//
 //        }
         return mang;
     }
 
+    public void compare(){
+        CountDownTimer start = new CountDownTimer(5000, 3000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                for (int j = 0; j < 2; j++) {
+                    for (int i = 0; i < ((pos1 + 1) * 2) / 2; i++) {
+                        arrayList3.add(arrayList1.get(i));
+                    }
+                }
+                Log.d("MISSION", "Number : " + arrayList3 + " : quangkhanhhahaha = "  );
+            }
 
+            @Override
+            public void onFinish() {
+                for (int j = 0; j < 2; j++) {
+                    for (int i = 0; i < ((pos1 + 1) * 2) / 2; i++) {
+                        arrayList3.add(arrayList2.get(i));
+                    }
+                }
+
+                Log.d("MISSION", "Number : " + arrayList3 + " : quangkhanhhahaha = "  );
+            }
+        }.start();
+    }
 }
