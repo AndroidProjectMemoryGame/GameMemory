@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity implements GameAdapter.OnClickListener {
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
-    int i, count =0, gan, pos;
+    int i, count =0, gan, pos, k =0;
     boolean check;
 
     ArrayList<Integer> arrayPos = new ArrayList<>();
@@ -212,14 +213,26 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(GameActivity.this, HomeActivity.class);
-                    startActivity(i);
+                    k++;
+                    saveLogin(k);
+                    finish();
                 }
             });
             //   txtMessage.setText(message);
             if (context instanceof Activity && !((Activity) context).isFinishing())
                 dialog.show();
         }
+    }
+
+    private void saveLogin(int dem){
+        SharedPreferences pref = getSharedPreferences("myprefer",MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("myuser", dem);
+        editor.commit();
+
+        Log.d("MISSION", "Number : " + pref.getInt("myuser",3)  + " : succeed5 = "  );
+
+
     }
 
 }

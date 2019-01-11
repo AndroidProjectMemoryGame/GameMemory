@@ -2,6 +2,7 @@ package com.example.hoih.my.gamememory;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -27,27 +28,34 @@ public class HomeActivity extends Activity {
         btnNoLimitTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                savePosition("1");
                 Intent i = new Intent(HomeActivity.this, ModeActivity.class);
-                i.putExtra("mode", "1");
                 startActivity(i);
             }
         });
         btnNormal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                savePosition("2");
                 Intent i = new Intent(HomeActivity.this, ModeActivity.class);
-                i.putExtra("mode", "2");
                 startActivity(i);
             }
         });
         btnHard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                savePosition("3");
                 Intent i = new Intent(HomeActivity.this, ModeActivity.class);
-                i.putExtra("mode", "3");
                 startActivity(i);
             }
         });
+    }
+
+    private void savePosition(String a){
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer",MODE_PRIVATE);
+        SharedPreferences.Editor editor = positionBuntton.edit();
+        editor.putString("myuser", a);
+        editor.commit();
     }
 
 }

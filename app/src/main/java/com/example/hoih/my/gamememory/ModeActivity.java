@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -57,32 +58,35 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
 
     private ArrayList<Level> getData(){
         ArrayList<Level> data = new ArrayList<>();
-        data.add(new Level(1));
-        data.add(new Level(2));
-        data.add(new Level(3));
-        data.add(new Level(4));
-        data.add(new Level(5));
-        data.add(new Level(6));
-        data.add(new Level(7));
-        data.add(new Level(8));
-        data.add(new Level(9));
-        data.add(new Level(10));
+            data.add(new Level(1));
+            data.add(new Level(2));
+            data.add(new Level(3));
+            data.add(new Level(4));
+            data.add(new Level(5));
+            data.add(new Level(6));
+            data.add(new Level(7));
+            data.add(new Level(8));
+            data.add(new Level(9));
+            data.add(new Level(10));
         return data;
     }
 
     @Override
     public void selectLevel(int position) {
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer",MODE_PRIVATE);
 
-        if (getIntent() != null) {
-            if (getIntent().getStringExtra("mode").equals("1")) {
+        if(!positionBuntton.getString("myuser","").equals("")){
+            if (positionBuntton.getString("myuser","").equals("1")) {
                 showNotice(this,"You have 5 seconds to rememorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
-            } else if (getIntent().getStringExtra("mode").equals("2")) {
+            } else if (positionBuntton.getString("myuser","").equals("2")) {
                 showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s", String.valueOf(position));
             } else {
                 showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s",String.valueOf(position));
             }
+
         }
     }
+
 
     public void showNotice(Context context, String message, String title, final String position) {
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
@@ -116,10 +120,11 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     }
 
     public void getMode(){
-        if (getIntent() != null) {
-            if (getIntent().getStringExtra("mode").equals("1")) {
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer",MODE_PRIVATE);
+        if (!positionBuntton.getString("myuser","").equals("")) {
+            if (positionBuntton.getString("myuser","").equals("1")) {
                 txtMode.setText("No Limit Time");
-            } else if (getIntent().getStringExtra("mode").equals("2")) {
+            } else if (positionBuntton.getString("myuser","").equals("2")) {
                 txtMode.setText("Normal");
             } else {
                 txtMode.setText("Hard");
