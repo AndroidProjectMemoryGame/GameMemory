@@ -37,6 +37,14 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        btnBack = (ImageButton) findViewById(R.id.btn_icon_back);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
          gridview = (GridView) findViewById(R.id.gridview);
         Intent intent = getIntent();
         i = Integer.parseInt(intent.getStringExtra("pos"));
