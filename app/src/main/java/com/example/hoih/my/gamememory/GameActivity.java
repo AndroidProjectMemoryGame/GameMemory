@@ -213,8 +213,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    k++;
-                    saveLogin(k);
                     finish();
                 }
             });
