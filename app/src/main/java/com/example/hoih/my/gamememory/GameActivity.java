@@ -28,6 +28,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     ArrayList<Integer> mang = new ArrayList<>();
     int i, count =0, gan, pos;
     boolean check;
+    ImageButton btnBack;
 
     ArrayList<Integer> arrayPos = new ArrayList<>();
     ArrayList<Integer> arrayList1 = new ArrayList<>();
