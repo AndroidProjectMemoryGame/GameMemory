@@ -65,7 +65,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             public void onFinish() {
                 check=true;
                 gridview.setAdapter(new GameAdapter(arrayList2,GameActivity.this,i,GameActivity.this,randomArray()));
-                Log.d("MISSION", "Number : " + arrayList1 + " : quangkhanhthum2 = ");
             }
         }.start();
 
