@@ -18,6 +18,8 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.Image;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     ArrayList<Integer> arrayPos = new ArrayList<>();
     ArrayList<Integer> arrayList1 = new ArrayList<>();
     ArrayList<Integer> arrayList2 = new ArrayList<>();
+
+    ImageButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +102,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     R.drawable.card19,
                     R.drawable.card20,
                     R.drawable.card21,
-
             };
     private Integer[] test =
             {
@@ -112,6 +115,15 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 arrayList2.add(test[0]);
             }
         }
+
+        btnBack = (ImageButton) findViewById(R.id.btn_icon_back);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public ArrayList<Integer> randomArray() {
@@ -190,7 +202,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     context);
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.dialog_end_game, null);
+            View view = inflater.inflate(R.layout.dialog_level_completed, null);
             alertDialogBuilder.setView(view);
             alertDialogBuilder.setCancelable(false);
             final AlertDialog dialog = alertDialogBuilder.create();

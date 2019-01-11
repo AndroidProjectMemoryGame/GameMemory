@@ -25,7 +25,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_normal);
+        setContentView(R.layout.activity_mode);
         levelListView = (ListView)findViewById(R.id.listView);
         txtIconBack = (TextView)findViewById(R.id.txt_icon_back);
         txtMode = (TextView)findViewById(R.id.txt_mode);
@@ -71,7 +71,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     }
 
     @Override
-    public void Levell(int position) {
+    public void selectLevel(int position) {
 
         if (getIntent() != null) {
             if (getIntent().getStringExtra("mode").equals("1")) {
