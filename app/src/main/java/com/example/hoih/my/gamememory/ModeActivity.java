@@ -82,7 +82,6 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                 showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s",String.valueOf(position));
             }
         }
-
     }
 
     public void showNotice(Context context, String message, String title, final String position) {
