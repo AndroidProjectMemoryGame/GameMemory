@@ -16,6 +16,7 @@
         android:background="#009788"
         >
         <ImageButton
+            android:id="@+id/btn_icon_back"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:src="@drawable/icon_back"
