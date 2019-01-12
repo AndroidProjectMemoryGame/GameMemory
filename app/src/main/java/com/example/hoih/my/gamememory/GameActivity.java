@@ -56,16 +56,40 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         tv_second_right = (TextView)findViewById(R.id.tv_second_right);
         tv_time = (TextView)findViewById(R.id.tv_time);
          gridview = (GridView) findViewById(R.id.gridview);
+
+        btnBack = (ImageButton) findViewById(R.id.btn_icon_back);
+        // handle back icon
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         Intent intent = getIntent();
         i = Integer.parseInt(intent.getStringExtra("pos"));
 
+        if (getIntent() != null) {
+            if (getIntent().getIntExtra("levelSelected", 0) == 5) {
+                time = 5000;
+            }
+            if (getIntent().getIntExtra("levelSelected", 0) == 7) {
+                time = 7000;
+            }
+            if (getIntent().getIntExtra("levelSelected", 0) == 10){
+                time = 10000;
+            }
+        }
+
+        // Start timer
+        startTimer(time);
 
         setData();
         randomArray();
         gridview.setAdapter(new GameAdapter(arrayList1,GameActivity.this,i,this,randomArray()));
         check = false;
 
-        new CountDownTimer(2000, 1000) {
+        new CountDownTimer(time, timeCountDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
                 Log.d("MISSION", "Number : " + arrayList1 + " : quangkhanhthum1 = ");
@@ -129,33 +153,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 arrayList2.add(test[0]);
             }
         }
-
-        btnBack = (ImageButton) findViewById(R.id.btn_icon_back);
-
-
-        if (getIntent() != null) {
-            if (getIntent().getIntExtra("levelSelected", 0) == 5) {
-                time = 5000;
-            }
-            if (getIntent().getIntExtra("levelSelected", 0) == 7) {
-                time = 7000;
-            }
-            if (getIntent().getIntExtra("levelSelected", 0) == 10){
-                time = 10000;
-            }
-        }
-
-        // Start timer
-        startTimer(time);
-
-        // handle back icon
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
     }
 
     public void startTimer(int time) {
