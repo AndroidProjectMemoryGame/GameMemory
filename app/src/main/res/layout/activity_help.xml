@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="250dp"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="#009788"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How to play ?"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_weight="3"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:orientation="vertical"
+        android:w="4"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:text="Top on a square to turn it over and see the picture it hides."
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:text="Tap on another square to turn it over too."
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:text="If the pictures match, they will stay facing up, if not, both will turn over again."
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:text="Find all couples."
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:text="OK"
+            android:textColor="#fff"
+            android:background="#009788"
+            android:layout_gravity="center"
+            android:id="@+id/btn_ok"
+            />
+    </LinearLayout>
+</LinearLayout>

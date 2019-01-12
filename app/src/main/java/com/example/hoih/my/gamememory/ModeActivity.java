@@ -23,6 +23,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     ListView levelListView;
     ArrayList<Level> levelData = new ArrayList<>();
     int levelSelected;
+    Button btn_help;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         levelListView = (ListView)findViewById(R.id.listView);
         txtIconBack = (TextView)findViewById(R.id.txt_icon_back);
         txtMode = (TextView)findViewById(R.id.txt_mode);
+        btn_help = (Button)findViewById(R.id.btn_help);
 
         txtIconBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +45,14 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         levelData = getData();
         final ListLevelAdapter adapter = new ListLevelAdapter(this, levelData,this);
         levelListView.setAdapter(adapter);
+
+        // Create even clink button help and call showHelp function
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHelp(ModeActivity.this);
+            }
+        });
     }
 
     private ArrayList<Level> getData(){
@@ -208,6 +218,33 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
             } else {
                 txtMode.setText("Hard");
             }
+        }
+    }
+    public void showHelp(Context context){
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    context);
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View view = inflater.inflate(R.layout.activity_help, null);
+            alertDialogBuilder.setView(view);
+            alertDialogBuilder.setCancelable(false);
+
+            final AlertDialog dialog = alertDialogBuilder.create();
+
+            Button btnGo = (findViewById(R.id.btn_ok));
+
+
+            btnGo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
+                }
+            });
+            //   txtMessage.setText(message);
+            if (context instanceof Activity && !((Activity) context).isFinishing())
+                dialog.show();
         }
     }
 }
