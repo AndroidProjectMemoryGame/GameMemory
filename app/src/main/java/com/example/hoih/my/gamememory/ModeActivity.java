@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     ListView levelListView;
     ArrayList<Level> levelData = new ArrayList<>();
     int levelSelected;
+    String arrScore = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,67 +53,49 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         ArrayList<Level> data2 = new ArrayList<>();
         ArrayList<Level> data3 = new ArrayList<>();
         ArrayList<Level> data4 = new ArrayList<>();
-        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level1",0) + " : level1 = ");
-        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level2",0) + " : level2 = ");
-        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level3",0) + " : level3 = ");
         if (positionBuntton.getString("myuser","").equals("1")){
-            int tam =0;
+            // luu level hien tai roi check, then moi cho chay level tiep theo
+                int tam =0;
             do {
-                if (positionBuntton.getInt("level1",0) <= 1) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel1", 0)));
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel1NoLimitTime", 0)));
+                    arrScore = arrScore + positionBuntton.getInt("scoreLevel1NoLimitTime",0);
+                    Toast.makeText(ModeActivity.this, "arrScore 1: " + arrScore, Toast.LENGTH_SHORT).show();
                     tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 2) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel2", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 3) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel3", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 4) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel4", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 5) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel5", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 6) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel6", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 7) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel7", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 8) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel8", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 9) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel9", 0)));
-                    tam++;
-                } else if (positionBuntton.getInt("level1",0) <= 10) {
-                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel10", 0)));
+                if (positionBuntton.getInt("positionLevel",0) == 1) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel2NoLimitTime", 0)));
+                    arrScore = arrScore + ", " + positionBuntton.getInt("scoreLevel2NoLimitTime",0);
+                    Toast.makeText(ModeActivity.this, "arrScore 2: " + arrScore, Toast.LENGTH_SHORT).show();
                     tam++;
                 }
-            }while (tam <= positionBuntton.getInt("level1",0));
+                if (positionBuntton.getInt("positionLevel",0) == 2) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel3NoLimitTime", 0)));
+                    arrScore = arrScore + ", " + positionBuntton.getInt("scoreLevel3NoLimitTime",0);
+                    Toast.makeText(ModeActivity.this, "arrScore 3: " + arrScore, Toast.LENGTH_SHORT).show();
+                    tam++;
+                }
+            }while (tam < positionBuntton.getInt("noLimitTime",0));
 
             data4.addAll(data1);
-        }else if(positionBuntton.getString("myuser","").equals("2")){
+        }
+        else if(positionBuntton.getString("myuser","").equals("2")){
             int tam =0;
             do {
                 data2.add(new Level(tam+1,1));
                 tam++;
-            }while (tam <= positionBuntton.getInt("level2",0));
+            }while (tam <= positionBuntton.getInt("normal",0));
             data4.addAll(data2);
 
-        }else{
+        }
+        else{
             int tam =0;
             do {
                 data3.add(new Level(tam+1,1));
                 tam++;
-            }while (tam <= positionBuntton.getInt("level3",0));
+            }while (tam <= positionBuntton.getInt("hard",0));
             data4.addAll(data3);
         }
         return data4;
     }
-
-
-
 
     @Override
     public void selectLevel(int position) {
@@ -188,10 +172,8 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                     i.putExtra("levelSelected", levelSelected);
                     i.putExtra("pos", position);
                     startActivity(i);
-                    Log.d("MISSION", "Number : " + position + " : succeed1 = "  );
                 }
             });
-            //   txtMessage.setText(message);
             if (context instanceof Activity && !((Activity) context).isFinishing())
                 dialog.show();
         }

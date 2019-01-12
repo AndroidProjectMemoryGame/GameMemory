@@ -211,12 +211,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     if (arrayList2.equals(arrayList1)){
                         showNotice(this);
 
-                        cTimer.cancel();
-                        Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
-                        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = positionBuntton.edit();
-                        editor.putInt("scoreLevel1", up);
-                        editor.commit();
+                        countTimeAllMode(i);
 
                     }
                     check = false;
@@ -266,27 +261,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = positionBuntton.edit();
-                    Log.d("MISSION", "huhu Number : " + positionBuntton.getString("myuser","") + " : level1 = ");
-                    if (positionBuntton.getString("myuser","").equals("1")){
-                        int tam = positionBuntton.getInt("level1",0);
-                        tam++;
-                        editor.putInt("level1", tam);
-                        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level1",0) + " : level1 = ");
-                    }else if(positionBuntton.getString("myuser","").equals("2")){
-                        int tam = positionBuntton.getInt("level2",0);
-                        tam++;
-                        editor.putInt("level2", tam);
-                    }else{
-                        int tam = positionBuntton.getInt("level3",0);
-                        tam++;
-                        editor.putInt("level3", tam);
-                    }
-                    editor.commit();
+                    saveMode();
 
-                    Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level2",0) + " : level2 = ");
-                    Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level3",0) + " : level3 = ");
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
                 }
@@ -295,6 +271,81 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             if (context instanceof Activity && !((Activity) context).isFinishing())
                 dialog.show();
         }
+    }
+
+    public void saveMode(){
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        SharedPreferences.Editor editor = positionBuntton.edit();
+
+        if (positionBuntton.getString("myuser","").equals("1")){
+            if(i == positionBuntton.getInt("noLimitTime",0)) {
+                int tam = positionBuntton.getInt("noLimitTime", 0);
+                tam++;
+                editor.putInt("noLimitTime", tam);
+            }
+        }
+        else if(positionBuntton.getString("myuser","").equals("2")){
+            if(i == positionBuntton.getInt("normal",0)) {
+                int tam = positionBuntton.getInt("normal", 0);
+                tam++;
+                editor.putInt("normal", tam);
+            }
+        }
+        else {
+            if(i == positionBuntton.getInt("hard",0)) {
+                int tam = positionBuntton.getInt("hard", 0);
+                tam++;
+                editor.putInt("hard", tam);
+            }
+        }
+        editor.commit();
+    }
+
+    public void countTimeAllMode(int position) {
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        SharedPreferences.Editor editor = positionBuntton.edit();
+
+        if (positionBuntton.getString("myuser","").equals("1")){
+            if(i == positionBuntton.getInt("noLimitTime",0)) {
+                Toast.makeText(GameActivity.this, "i: " + i, Toast.LENGTH_SHORT).show();
+                if(position == 0) {
+                    cTimer.cancel();
+                    Toast.makeText(GameActivity.this, "Your Score in Level 1: " + up, Toast.LENGTH_SHORT).show();
+                    editor.putInt("scoreLevel1NoLimitTime", up);
+                    editor.putInt("positionLevel", position+1);
+                    editor.commit();
+                } else if(position == 1) {
+                    cTimer.cancel();
+                    Toast.makeText(GameActivity.this, "Your Score in Level 2: " + up, Toast.LENGTH_SHORT).show();
+                    editor.putInt("scoreLevel2NoLimitTime", up);
+                    editor.putInt("positionLevel", position+1);
+                    editor.commit();
+                } else if(position == 2) {
+                    cTimer.cancel();
+                    Toast.makeText(GameActivity.this, "Your Score in Level 3: " + up, Toast.LENGTH_SHORT).show();
+                    editor.putInt("scoreLevel3NoLimitTime", up);
+                    editor.putInt("positionLevel", position+1);
+                    editor.commit();
+                }
+            }
+        }
+//        else if(positionBuntton.getString("myuser","").equals("2")){
+//            if(i == positionBuntton.getInt("normal",0)) {
+//                cTimer.cancel();
+//                Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
+//                editor.putInt("scoreLevel1", up);
+//                editor.commit();
+//            }
+//        }
+//        else {
+//            if(i == positionBuntton.getInt("hard",0)) {
+//                cTimer.cancel();
+//                Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
+//                editor.putInt("scoreLevel1", up);
+//                editor.commit();
+//            }
+//        }
+        editor.commit();
     }
 
 }
