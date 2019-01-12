@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,22 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.media.Image;
 import android.widget.ImageButton;
-import android.widget.TextView;
-
-import java.util.concurrent.TimeUnit;
-
-import static android.media.MediaExtractor.MetricsConstants.FORMAT;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements GameAdapter.OnClickListener {
@@ -100,6 +89,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 check=true;
                 gridview.setAdapter(new GameAdapter(arrayList2,GameActivity.this,i,GameActivity.this,randomArray()));
                 Log.d("MISSION", "Number : " + arrayList1 + " : quangkhanhthum2 = ");
+//                getCountUpTimer(8000);
             }
         }.start();
 
@@ -164,26 +154,27 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
             public void onFinish() {
                 tv_second_left.setText("0");
-
-                // chưa xong
+                // chua xong
                 isCountDownFinish = true;
                 if (isCountDownFinish == true) {
-                    // continue countUp Timer
-                    getCountUpTimer(timeCountUp);
+                    getCountUpTimer(30000);
                 }
             }
         }.start();
     }
 
     public void getCountUpTimer(int timeCountUp) {
+
         new CountDownTimer(timeCountUp, timeCountDownInterval) {
 
             public void onTick(long millisUntilFinished) {
-                tv_second_left.setText("" + millisUntilFinished + 1000);
+                time = 31000;
+                tv_second_left.setText("" + (time - millisUntilFinished) / 1000);
             }
 
             public void onFinish() {
-                tv_second_left.setText("0");
+                cancelTimer();
+//                tv_second_left.setText("00");
             }
         }.start();
     }
