@@ -2,6 +2,7 @@ package com.example.hoih.my.gamememory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +18,8 @@ import java.util.ArrayList;
 
 public class ModeActivity extends Activity implements ListLevelAdapter.OnClickListener{
 
-    TextView txtIconBack, txtMode;
+    TextView txtIconBack, txtMode, txt_help;
     ListView levelListView;
-    Button btnHelp;
     ArrayList<Level> levelData = new ArrayList<>();
 
     @Override
@@ -29,7 +29,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         levelListView = (ListView)findViewById(R.id.listView);
         txtIconBack = (TextView)findViewById(R.id.txt_icon_back);
         txtMode = (TextView)findViewById(R.id.txt_mode);
-        btnHelp = (Button)findViewById(R.id.bt_help);
+        txt_help = (TextView) findViewById(R.id.txt_help);
 
         txtIconBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,13 +53,12 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                 startActivity(i);
             }
         });
-        btnHelp.setOnClickListener(new View.OnClickListener() {
+
+        txt_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showHelp(ModeActivity.this);
             }
-
-
         });
     }
 
@@ -115,6 +114,34 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                     dialog.cancel();
                     Intent i = new Intent(ModeActivity.this, GameActivity.class);
                     startActivity(i);
+                }
+            });
+            //   txtMessage.setText(message);
+            if (context instanceof Activity && !((Activity) context).isFinishing())
+                dialog.show();
+        }
+    }
+
+    public void showHelp(Context context) {
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    context);
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View view = inflater.inflate(R.layout.activity_help, null);
+            alertDialogBuilder.setView(view);
+            alertDialogBuilder.setCancelable(false);
+
+            final AlertDialog dialog = alertDialogBuilder.create();
+
+            Button btnGo = (findViewById(R.id.btn_ok));
+
+
+            btnGo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.cancel();
                 }
             });
             //   txtMessage.setText(message);
