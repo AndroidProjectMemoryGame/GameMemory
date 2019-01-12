@@ -35,47 +35,54 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         txtIconBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent back = new Intent(ModeActivity.this,HomeActivity.class);
+                startActivity(back);
             }
         });
-
         getMode();
-
-
         levelData = getData();
-
         final ListLevelAdapter adapter = new ListLevelAdapter(this, levelData,this);
         levelListView.setAdapter(adapter);
-
-        levelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if(position == 0){
-                    SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = positionBuntton.edit();
-                    editor.putInt("level", 0);
-                    editor.commit();
-                }
-                Intent i = new Intent(ModeActivity.this, LevelDetailActivity.class);
-                i.putExtra("level",levelData.get(position).getLevel());
-                startActivity(i);
-            }
-        });
     }
 
     private ArrayList<Level> getData(){
         SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-        ArrayList<Level> data = new ArrayList<>();
-        int tam =0;
-        do {
-            data.add(new Level(tam+1));
-            tam++;
-        }while (tam <= positionBuntton.getInt("level",0));
+        ArrayList<Level> data1 = new ArrayList<>();
+        ArrayList<Level> data2 = new ArrayList<>();
+        ArrayList<Level> data3 = new ArrayList<>();
+        ArrayList<Level> data4 = new ArrayList<>();
+        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level1",0) + " : level1 = ");
+        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level2",0) + " : level2 = ");
+        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level3",0) + " : level3 = ");
+        if (positionBuntton.getString("myuser","").equals("1")){
+            int tam =0;
+            do {
+                data1.add(new Level(tam+1));
+                tam++;
+            }while (tam <= positionBuntton.getInt("level1",0));
 
-        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level",0) + " : quangkhanhhahaha = ");
+            data4.addAll(data1);
+        }else if(positionBuntton.getString("myuser","").equals("2")){
+            int tam =0;
+            do {
+                data2.add(new Level(tam+1));
+                tam++;
+            }while (tam <= positionBuntton.getInt("level2",0));
+            data4.addAll(data2);
 
-        return data;
+        }else{
+            int tam =0;
+            do {
+                data3.add(new Level(tam+1));
+                tam++;
+            }while (tam <= positionBuntton.getInt("level3",0));
+            data4.addAll(data3);
+        }
+        return data4;
     }
+
+
+
 
     @Override
     public void selectLevel(int position) {
@@ -137,7 +144,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.dialog_start_game, null);
             alertDialogBuilder.setView(view);
-            alertDialogBuilder.setCancelable(false);
+            alertDialogBuilder.setCancelable(true);
             final AlertDialog dialog = alertDialogBuilder.create();
             Button btnGo = (Button) view.findViewById(R.id.btn_go);
             TextView txvMessage = (TextView) view.findViewById(R.id.txv_message);
