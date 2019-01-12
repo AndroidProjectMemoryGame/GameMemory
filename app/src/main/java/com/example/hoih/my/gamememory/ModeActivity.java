@@ -22,6 +22,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     TextView txtIconBack, txtMode;
     ListView levelListView;
     ArrayList<Level> levelData = new ArrayList<>();
+    int levelSelected;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,18 +76,53 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     public void selectLevel(int position) {
         SharedPreferences positionBuntton = getSharedPreferences("myprefer",MODE_PRIVATE);
 
-        if(!positionBuntton.getString("myuser","").equals("")){
-            if (positionBuntton.getString("myuser","").equals("1")) {
-                showNotice(this,"You have 5 seconds to rememorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
-            } else if (positionBuntton.getString("myuser","").equals("2")) {
-                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s", String.valueOf(position));
-            } else {
-                showNotice(this,"You have 5 seconds to rememorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s",String.valueOf(position));
-            }
-
+        if(!positionBuntton.getString("myuser","").equals(""))
+        {
+            if (positionBuntton.getString("myuser","").equals("1"))
+            {
+                if(position == 0 || position == 1 || position == 2) {
+                    levelSelected = 5;
+                    showNotice(this,"You have 5 seconds to memorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
+                }
+                if (position == 3 || position == 4 || position == 5) {
+                    levelSelected = 7;
+                    showNotice(this,"You have 7 seconds to memorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
+                }
+                if (position == 6 || position == 7 || position == 8 || position == 9) {
+                    levelSelected = 10;
+                    showNotice(this,"You have 10 seconds to memorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
+                }
+            } else if (positionBuntton.getString("myuser","").equals("2"))
+            {
+                if(position == 0 || position == 1 || position == 2) {
+                    levelSelected = 5;
+                    showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s", String.valueOf(position));
+                }
+                if (position == 3 || position == 4 || position == 5) {
+                    levelSelected = 7;
+                    showNotice(this,"You have 7 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s", String.valueOf(position));
+                }
+                if (position == 6 || position == 7 || position == 8 || position == 9) {
+                    levelSelected = 10;
+                    showNotice(this,"You have 10 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  30 s", String.valueOf(position));
+                }
+            } else
+             {
+                if(position == 0 || position == 1 || position == 2) {
+                    levelSelected = 5;
+                    showNotice(this,"You have 5 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s",String.valueOf(position));
+                }
+                if (position == 3 || position == 4 || position == 5) {
+                    levelSelected = 7;
+                    showNotice(this,"You have 7 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s",String.valueOf(position));
+                }
+                if (position == 6 || position == 7 || position == 8 || position == 9) {
+                    levelSelected = 10;
+                    showNotice(this,"You have 10 seconds to memorize all images! \n\n Bonus: 5 seconds extra per match","TIME:  5 s",String.valueOf(position));
+                }
+             }
         }
     }
-
 
     public void showNotice(Context context, String message, String title, final String position) {
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
@@ -108,6 +144,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                 public void onClick(View v) {
                     dialog.cancel();
                     Intent i = new Intent(ModeActivity.this, GameActivity.class);
+                    i.putExtra("levelSelected", levelSelected);
                     i.putExtra("pos", position);
                     startActivity(i);
                     Log.d("MISSION", "Number : " + position + " : succeed1 = "  );
@@ -121,7 +158,8 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
 
     public void getMode(){
         SharedPreferences positionBuntton = getSharedPreferences("myprefer",MODE_PRIVATE);
-        if (!positionBuntton.getString("myuser","").equals("")) {
+        if (!positionBuntton.getString("myuser","").equals(""))
+        {
             if (positionBuntton.getString("myuser","").equals("1")) {
                 txtMode.setText("No Limit Time");
             } else if (positionBuntton.getString("myuser","").equals("2")) {

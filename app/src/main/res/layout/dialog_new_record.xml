@@ -1,94 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:background="#009788"
+        android:gravity="center"
         >
         <TextView
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="30dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="-21dp"
-            android:text="NEW RECORD!"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            />
-        <LinearLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:paddingTop="30dp"
-              android:layout_gravity="center">
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="4"
-                  android:textSize="20dp"
-                  android:paddingRight="5dp"
-                  android:textColor="@color/colorPrimaryDark"
-                  />
-              <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="SECONDS"
-                  android:textSize="20dp"/>
-        </LinearLayout>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NO TIME LIMIT"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-
-            />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-
-            android:layout_gravity="center"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="LEVEL"
-                android:textSize="20dp"
-                android:paddingRight="5dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="20dp"
-                android:textColor="@color/colorPrimaryDark"
-                />
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WELL DONE"
-            android:textSize="20dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            />
-
-        <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="OK"
+            android:text="New Record!"
             android:textColor="#fff"
-            android:background="#009788"
-            android:text="OK" />
+            android:textStyle="bold"
+            android:layout_weight="3" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="NO TIME LIMIT"/>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="4 s"/>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="LEVEL 1"/>
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="WELL DONE"/>
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:text="OK"
+        android:textColor="#fff"
+        android:background="#009788"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        />
 </LinearLayout>
