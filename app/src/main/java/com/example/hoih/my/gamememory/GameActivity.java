@@ -45,7 +45,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         tv_second_right = (TextView)findViewById(R.id.tv_second_right);
         tv_time = (TextView)findViewById(R.id.tv_time);
          gridview = (GridView) findViewById(R.id.gridview);
-
         btnBack = (ImageButton) findViewById(R.id.btn_icon_back);
         // handle back icon
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +162,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         }.start();
     }
 
+
     public void getCountUpTimer(int timeCountUp) {
 
         new CountDownTimer(timeCountUp, timeCountDownInterval) {
@@ -272,10 +272,25 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 public void onClick(View v) {
                     SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
                     SharedPreferences.Editor editor = positionBuntton.edit();
-                    int tam = positionBuntton.getInt("level",0);
-                    tam++;
-                    editor.putInt("level", tam);
+                    Log.d("MISSION", "huhu Number : " + positionBuntton.getString("myuser","") + " : level1 = ");
+                    if (positionBuntton.getString("myuser","").equals("1")){
+                        int tam = positionBuntton.getInt("level1",0);
+                        tam++;
+                        editor.putInt("level1", tam);
+                        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level1",0) + " : level1 = ");
+                    }else if(positionBuntton.getString("myuser","").equals("2")){
+                        int tam = positionBuntton.getInt("level2",0);
+                        tam++;
+                        editor.putInt("level2", tam);
+                    }else{
+                        int tam = positionBuntton.getInt("level3",0);
+                        tam++;
+                        editor.putInt("level3", tam);
+                    }
                     editor.commit();
+
+                    Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level2",0) + " : level2 = ");
+                    Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level3",0) + " : level3 = ");
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
                 }
@@ -284,17 +299,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             if (context instanceof Activity && !((Activity) context).isFinishing())
                 dialog.show();
         }
-    }
-
-    private void saveLogin(int dem){
-        SharedPreferences pref = getSharedPreferences("myprefer",MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("myuser", dem);
-        editor.commit();
-
-        Log.d("MISSION", "Number : " + pref.getInt("myuser",3)  + " : succeed5 = "  );
-
-
     }
 
 }
