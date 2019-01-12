@@ -50,6 +50,12 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         levelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if(position == 0){
+                    SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = positionBuntton.edit();
+                    editor.putInt("level", 0);
+                    editor.commit();
+                }
                 Intent i = new Intent(ModeActivity.this, LevelDetailActivity.class);
                 i.putExtra("level",levelData.get(position).getLevel());
                 startActivity(i);
@@ -58,17 +64,16 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
     }
 
     private ArrayList<Level> getData(){
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
         ArrayList<Level> data = new ArrayList<>();
-            data.add(new Level(1));
-            data.add(new Level(2));
-            data.add(new Level(3));
-            data.add(new Level(4));
-            data.add(new Level(5));
-            data.add(new Level(6));
-            data.add(new Level(7));
-            data.add(new Level(8));
-            data.add(new Level(9));
-            data.add(new Level(10));
+        int tam =0;
+        do {
+            data.add(new Level(tam+1));
+            tam++;
+        }while (tam <= positionBuntton.getInt("level",0));
+
+        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level",0) + " : quangkhanhhahaha = ");
+
         return data;
     }
 
