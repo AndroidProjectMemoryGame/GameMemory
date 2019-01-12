@@ -279,7 +279,14 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    finish();
+                    SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = positionBuntton.edit();
+                    int tam = positionBuntton.getInt("level",0);
+                    tam++;
+                    editor.putInt("level", tam);
+                    editor.commit();
+                    Intent back = new Intent(GameActivity.this,ModeActivity.class);
+                    startActivity(back);
                 }
             });
             //   txtMessage.setText(message);
