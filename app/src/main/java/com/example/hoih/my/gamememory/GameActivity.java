@@ -23,7 +23,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity implements GameAdapter.OnClickListener {
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
-    int i, count =0, gan, pos, k =0;
+    int i, count =0, gan, pos;
     boolean check;
 
     ArrayList<Integer> arrayPos = new ArrayList<>();
@@ -32,10 +32,10 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
     TextView tv_second_left, tv_second_right, tv_time;
     ImageButton btnBack;
-    CountDownTimer cTimer = null;
-    int time, timeCountUp = 0;
+    int time;
     int timeCountDownInterval = 1000;
-    boolean isCountDownFinish = false;
+    CountDownTimer cTimer;
+    int up = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         tv_second_left = (TextView)findViewById(R.id.tv_second_left);
         tv_second_right = (TextView)findViewById(R.id.tv_second_right);
         tv_time = (TextView)findViewById(R.id.tv_time);
-         gridview = (GridView) findViewById(R.id.gridview);
+        gridview = (GridView) findViewById(R.id.gridview);
         btnBack = (ImageButton) findViewById(R.id.btn_icon_back);
         // handle back icon
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +88,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 check=true;
                 gridview.setAdapter(new GameAdapter(arrayList2,GameActivity.this,i,GameActivity.this,randomArray()));
                 Log.d("MISSION", "Number : " + arrayList1 + " : quangkhanhthum2 = ");
-//                getCountUpTimer(8000);
             }
         }.start();
 
@@ -153,35 +152,25 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
             public void onFinish() {
                 tv_second_left.setText("0");
-                // chua xong
-                isCountDownFinish = true;
-                if (isCountDownFinish == true) {
-                    getCountUpTimer(30000);
-                }
+                getCountUpTimer(Integer.MAX_VALUE);
             }
         }.start();
     }
-
 
     public void getCountUpTimer(int timeCountUp) {
 
-        new CountDownTimer(timeCountUp, timeCountDownInterval) {
+        cTimer = new CountDownTimer(timeCountUp, timeCountDownInterval) {
 
             public void onTick(long millisUntilFinished) {
-                time = 31000;
-                tv_second_left.setText("" + (time - millisUntilFinished) / 1000);
+                up++;
+                tv_second_left.setText("" +up);
             }
 
             public void onFinish() {
-                cancelTimer();
-//                tv_second_left.setText("00");
+                cTimer.cancel();
             }
-        }.start();
-    }
-
-    public void cancelTimer() {
-        if(cTimer != null)
-            cTimer.cancel();
+        };
+        cTimer.start();
     }
 
     public ArrayList<Integer> randomArray() {
@@ -221,6 +210,13 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 if (count == 2) {
                     if (arrayList2.equals(arrayList1)){
                         showNotice(this);
+
+                        cTimer.cancel();
+                        Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
+                        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = positionBuntton.edit();
+                        editor.putInt("scoreLevel1", up);
+                        editor.commit();
 
                     }
                     check = false;

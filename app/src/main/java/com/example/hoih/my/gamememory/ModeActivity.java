@@ -57,15 +57,44 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         if (positionBuntton.getString("myuser","").equals("1")){
             int tam =0;
             do {
-                data1.add(new Level(tam+1));
-                tam++;
+                if (positionBuntton.getInt("level1",0) <= 1) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel1", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 2) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel2", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 3) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel3", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 4) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel4", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 5) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel5", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 6) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel6", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 7) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel7", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 8) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel8", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 9) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel9", 0)));
+                    tam++;
+                } else if (positionBuntton.getInt("level1",0) <= 10) {
+                    data1.add(new Level(tam + 1, positionBuntton.getInt("scoreLevel10", 0)));
+                    tam++;
+                }
             }while (tam <= positionBuntton.getInt("level1",0));
 
             data4.addAll(data1);
         }else if(positionBuntton.getString("myuser","").equals("2")){
             int tam =0;
             do {
-                data2.add(new Level(tam+1));
+                data2.add(new Level(tam+1,1));
                 tam++;
             }while (tam <= positionBuntton.getInt("level2",0));
             data4.addAll(data2);
@@ -73,7 +102,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         }else{
             int tam =0;
             do {
-                data3.add(new Level(tam+1));
+                data3.add(new Level(tam+1,1));
                 tam++;
             }while (tam <= positionBuntton.getInt("level3",0));
             data4.addAll(data3);
@@ -94,15 +123,15 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
             {
                 if(position == 0 || position == 1 || position == 2) {
                     levelSelected = 5;
-                    showNotice(this,"You have 5 seconds to memorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
+                    showNotice(this,"You have 5 seconds to memorize all images!","TIME:  NO LIMIT TIME", String.valueOf(position));
                 }
                 if (position == 3 || position == 4 || position == 5) {
                     levelSelected = 7;
-                    showNotice(this,"You have 7 seconds to memorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
+                    showNotice(this,"You have 7 seconds to memorize all images!","TIME:  NO LIMIT TIME", String.valueOf(position));
                 }
                 if (position == 6 || position == 7 || position == 8 || position == 9) {
                     levelSelected = 10;
-                    showNotice(this,"You have 10 seconds to memorize all images!","TIME:  NO TIME LIMIT", String.valueOf(position));
+                    showNotice(this,"You have 10 seconds to memorize all images!","TIME:  NO LIMIT TIME", String.valueOf(position));
                 }
             } else if (positionBuntton.getString("myuser","").equals("2"))
             {

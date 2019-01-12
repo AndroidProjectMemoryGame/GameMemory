@@ -46,7 +46,7 @@ public class ListLevelAdapter extends BaseAdapter{
         View rowView = inflater.inflate(R.layout.item_level, parent, false);
 
         Button btnLevel = (Button)rowView.findViewById(R.id.btn_level);
-        btnLevel.setText("Level " + levelData.get(position).getLevel());
+        btnLevel.setText("Level " + levelData.get(position).getLevel()+" - "+levelData.get(position).getScore() +" s");
 
         btnLevel.setOnClickListener(new View.OnClickListener() {
             @Override
