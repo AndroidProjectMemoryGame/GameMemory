@@ -55,58 +55,73 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         ArrayList<String> save = new ArrayList<>();
 
         SharedPreferences.Editor editor = positionBuntton.edit();
-        for (String w : positionBuntton.getString("scoreLevel1", "").split("\\,", 0)) {
-            savetam.add(w.trim());
-        }
-
-        if (positionBuntton.getInt("level1", 0)==0){
-            data1.add(new Level(1, 0));
-            Log.d("MISSION", "huhu Number : " + positionBuntton.getString("scoreLevel1","") + " : quangkhanhcuteupok2 = ");
-            data4.addAll(data1);
-        }else {
-            for (int u = savetam.size()-1; u >= 0; u--) {
-                save.add(savetam.get(u));
-            }
-
-            Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcuteupsave1 = ");
-            Log.d("MISSION", "huhu Number : " + savetam + " : quangkhanhcuteupsavetam = ");
             if (positionBuntton.getString("myuser", "").equals("1")) {
-                int tam = 0;
-                Log.d("MISSION", "huhu Number : " + positionBuntton.getString("scoreLevel1", "") + " : quangkhanhcuteupok3 = ");
-                do {
-                    if (tam == positionBuntton.getInt("level1",0)){
-                        data1.add(new Level(tam + 1, Integer.parseInt(save.get(0))));
-                    }else {
-                        data1.add(new Level(tam + 1, Integer.parseInt(save.get(tam + 1))));
+                if (positionBuntton.getInt("level1", 0)==0){
+                    data1.add(new Level(1, 0));
+                }else {
+                    for (String w : positionBuntton.getString("scoreLevel1", "").split("\\,", 0)) {
+                        savetam.add(w.trim());
                     }
-                    tam++;
-                } while (tam <= positionBuntton.getInt("level1", 0));
+                    for (int u = savetam.size() - 1; u >= 0; u--) {
+                        save.add(savetam.get(u));
+                    }
+                    int tam = 0;
+                    do {
+                        if (tam == positionBuntton.getInt("level1", 0)) {
+                            data1.add(new Level(tam + 1, Integer.parseInt(save.get(0))));
+                        } else {
+                            data1.add(new Level(tam + 1, Integer.parseInt(save.get(tam + 1))));
+                        }
+                        tam++;
+                    } while (tam <= positionBuntton.getInt("level1", 0));
+                }
                 data4.addAll(data1);
             } else if (positionBuntton.getString("myuser", "").equals("2")) {
-                int tam = 0;
-                do {
-                    if (tam == positionBuntton.getInt("level2",0)){
-                        data2.add(new Level(tam + 1, Integer.parseInt(save.get(0))));
-                    }else {
-                        data2.add(new Level(tam + 1, Integer.parseInt(save.get(tam + 1))));
+                if (positionBuntton.getInt("level2", 0)==0){
+                    data1.add(new Level(1, 0));
+                    data4.addAll(data1);
+                }else {
+                    for (String w : positionBuntton.getString("scoreLevel2", "").split("\\,", 0)) {
+                        savetam.add(w.trim());
                     }
-                    tam++;
-                } while (tam <= positionBuntton.getInt("level2", 0));
+                    for (int u = savetam.size() - 1; u >= 0; u--) {
+                        save.add(savetam.get(u));
+                    }
+                    int tam = 0;
+                    do {
+                        if (tam == positionBuntton.getInt("level2", 0)) {
+                            data2.add(new Level(tam + 1, Integer.parseInt(save.get(0))));
+                        } else {
+                            data2.add(new Level(tam + 1, Integer.parseInt(save.get(tam + 1))));
+                        }
+                        tam++;
+                    } while (tam <= positionBuntton.getInt("level2", 0));
+                }
                 data4.addAll(data2);
 
             } else {
-                int tam = 0;
-                do {
-                    if (tam == positionBuntton.getInt("level3",0)){
-                        data3.add(new Level(tam + 1, Integer.parseInt(save.get(0))));
-                    }else {
-                        data3.add(new Level(tam + 1, Integer.parseInt(save.get(tam + 1))));
+                if (positionBuntton.getInt("level3", 0)==0){
+                    data1.add(new Level(1, 0));
+                    data4.addAll(data1);
+                }else {
+                    for (String w : positionBuntton.getString("scoreLevel3", "").split("\\,", 0)) {
+                        savetam.add(w.trim());
                     }
-                    tam++;
-                } while (tam <= positionBuntton.getInt("level3", 0));
+                    for (int u = savetam.size() - 1; u >= 0; u--) {
+                        save.add(savetam.get(u));
+                    }
+                    int tam = 0;
+                    do {
+                        if (tam == positionBuntton.getInt("level3", 0)) {
+                            data3.add(new Level(tam + 1, Integer.parseInt(save.get(0))));
+                        } else {
+                            data3.add(new Level(tam + 1, Integer.parseInt(save.get(tam + 1))));
+                        }
+                        tam++;
+                    } while (tam <= positionBuntton.getInt("level3", 0));
+                }
                 data4.addAll(data3);
             }
-        }
         return data4;
     }
 

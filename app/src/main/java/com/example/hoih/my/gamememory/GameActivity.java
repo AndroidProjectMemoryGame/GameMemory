@@ -23,8 +23,6 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity implements GameAdapter.OnClickListener {
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
-    ArrayList<String> save = new ArrayList<>();
-    ArrayList<String> save1 = new ArrayList<>();
     String goi;
     int i, count =0, gan, pos;
     boolean check;
@@ -265,45 +263,89 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     }
 
     public void saveScore( int location){
+        ArrayList<String> save = new ArrayList<>();
         SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
         SharedPreferences.Editor editor = positionBuntton.edit();
-        for (String w : positionBuntton.getString("scoreLevel1", "").split("\\,", 0)) {
-            save.add(w.trim());
-        }
-        Log.d("MISSION", "huhu Number : " + save.size() + " : quangkhanhcutesze1 = ");
-        if (save.size() == location) {
-            if (location == 1) {
-                editor.putString("scoreLevel1", String.valueOf(up) + ",0");
-                editor.commit();
-                Log.d("MISSION", "huhu Number : " + save.size() + " : quangkhanhcutesze = ");
-                Log.d("MISSION", "huhu Number : " + up + " : quangkhanhcuteup = ");
-            }else {
-                editor.putString("scoreLevel1", String.valueOf(up) +","+ positionBuntton.getString("scoreLevel1",""));
-                editor.commit();
+
+        if(positionBuntton.getString("myuser","").equals("1")) {
+            for (String w : positionBuntton.getString("scoreLevel1", "").split("\\,", 0)) {
+                save.add(w.trim());
+            }
+            if (save.size() == location) {
+                if (location == 1) {
+                    editor.putString("scoreLevel1", String.valueOf(up) + ",0");
+                    editor.commit();
+                } else {
+                    editor.putString("scoreLevel1", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel1", ""));
+                    editor.commit();
+                }
+            } else {
+                String k = save.get(save.size() - 2 - i);
+                if (Integer.parseInt(k) > up) {
+                    int size = save.size() - 2 - i;
+                    save.remove(size);
+                    save.add(size, String.valueOf(up));
+                    String f = "";
+                    for (int u = 0; u < save.size(); u++) {
+                        f = f + save.get(u) + ",";
+                    }
+                    editor.putString("scoreLevel1", f);
+                    editor.commit();
+                }
+            }
+        }else if (positionBuntton.getString("myuser","").equals("2")){
+            for (String w : positionBuntton.getString("scoreLevel2", "").split("\\,", 0)) {
+                save.add(w.trim());
+            }
+            if (save.size() == location) {
+                if (location == 1) {
+                    editor.putString("scoreLevel2", String.valueOf(up) + ",0");
+                    editor.commit();
+                } else {
+                    editor.putString("scoreLevel2", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel1", ""));
+                    editor.commit();
+                }
+            } else {
+                String k = save.get(save.size() - 2 - i);
+                if (Integer.parseInt(k) > up) {
+                    int size = save.size() - 2 - i;
+                    save.remove(size);
+                    save.add(size, String.valueOf(up));
+                    String f = "";
+                    for (int u = 0; u < save.size(); u++) {
+                        f = f + save.get(u) + ",";
+                    }
+                    editor.putString("scoreLevel2", f);
+                    editor.commit();
+                }
             }
         }else {
-            String k = save.get(save.size()-2-i);
-            Log.d("MISSION", "huhu Number : " + k + " : quangkhanhcutek1 = ");
-            Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcutesave1 = ");
-            if (Integer.parseInt(k) > up){
-                int size = save.size()-2-i;
-                save.remove(size);
-                Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcutesave2 = ");
-                save.add(size, String.valueOf(up));
-                Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcutesave3 = ");
-                String f="";
-                for (int u = 0;u < save.size(); u++){
-                    f = f + save.get(u)+",";
+            for (String w : positionBuntton.getString("scoreLevel3", "").split("\\,", 0)) {
+                save.add(w.trim());
+            }
+            if (save.size() == location) {
+                if (location == 1) {
+                    editor.putString("scoreLevel3", String.valueOf(up) + ",0");
+                    editor.commit();
+                } else {
+                    editor.putString("scoreLevel3", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel1", ""));
+                    editor.commit();
                 }
-                editor.putString("scoreLevel1", f);
-                editor.commit();
-                Log.d("MISSION", "huhu Number : " + f + " : quangkhanhcutef = ");
-                Log.d("MISSION", "huhu Number : " + up + " : quangkhanhcuteup = ");
+            } else {
+                String k = save.get(save.size() - 2 - i);
+                if (Integer.parseInt(k) > up) {
+                    int size = save.size() - 2 - i;
+                    save.remove(size);
+                    save.add(size, String.valueOf(up));
+                    String f = "";
+                    for (int u = 0; u < save.size(); u++) {
+                        f = f + save.get(u) + ",";
+                    }
+                    editor.putString("scoreLevel3", f);
+                    editor.commit();
+                }
             }
         }
-
-        Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcuteok = ");
-        Log.d("MISSION", "huhu Number : " + positionBuntton.getString("scoreLevel1","") + " : quangkhanhcuteupok = ");
     }
 
     public void showNotice(Context context) {
