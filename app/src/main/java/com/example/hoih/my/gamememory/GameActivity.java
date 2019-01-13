@@ -302,7 +302,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.putString("scoreLevel2", String.valueOf(up) + ",0");
                     editor.commit();
                 } else {
-                    editor.putString("scoreLevel2", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel1", ""));
+                    editor.putString("scoreLevel2", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel2", ""));
                     editor.commit();
                 }
             } else {
@@ -328,7 +328,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.putString("scoreLevel3", String.valueOf(up) + ",0");
                     editor.commit();
                 } else {
-                    editor.putString("scoreLevel3", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel1", ""));
+                    editor.putString("scoreLevel3", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel3", ""));
                     editor.commit();
                 }
             } else {
