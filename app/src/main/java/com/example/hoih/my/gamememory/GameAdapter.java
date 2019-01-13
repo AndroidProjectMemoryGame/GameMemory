@@ -52,7 +52,7 @@ public class GameAdapter extends BaseAdapter {
             // if it's not recycled, initialize some attributes
             buttonView = new ImageButton(context);
             if(pos <4){
-                buttonView.setLayoutParams(new ViewGroup.LayoutParams(180, 180));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(150, 150));
             }
 
             else if(pos == 4){
@@ -62,7 +62,7 @@ public class GameAdapter extends BaseAdapter {
 
             buttonView.setBackgroundResource(R.drawable.border_game);
             buttonView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            buttonView.setPadding(4, 4, 4, 4);
+            buttonView.setPadding(2, 2, 2, 2);
         } else {
             buttonView = (ImageButton) convertView;
         }
