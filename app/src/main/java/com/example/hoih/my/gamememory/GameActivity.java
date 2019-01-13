@@ -23,6 +23,9 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity implements GameAdapter.OnClickListener {
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
+    ArrayList<String> save = new ArrayList<>();
+    ArrayList<String> save1 = new ArrayList<>();
+    String goi;
     int i, count =0, gan, pos;
     boolean check;
 
@@ -206,17 +209,28 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 arrayList2.add(a, arrayList1.get(a));
                 gridview.setAdapter(new GameAdapter(arrayList2, GameActivity.this, i, GameActivity.this, mang));
                 count++;
-
                 if (count == 2) {
                     if (arrayList2.equals(arrayList1)){
-                        showNotice(this);
-
                         cTimer.cancel();
                         Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
-                        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = positionBuntton.edit();
-                        editor.putInt("scoreLevel1", up);
-                        editor.commit();
+
+                        switch (i) {
+                            case 0:
+                                saveScore(1);
+                                break;
+                            case 1 :
+                                saveScore(2);
+                                break;
+                            case 2 :
+                                saveScore(3);
+                                break;
+                            case 3 :
+                                saveScore(4);
+                                break;
+                            default: saveScore(5);
+
+                        }
+                        showNotice(this);
 
                     }
                     check = false;
@@ -250,6 +264,48 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
     }
 
+    public void saveScore( int location){
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        SharedPreferences.Editor editor = positionBuntton.edit();
+        for (String w : positionBuntton.getString("scoreLevel1", "").split("\\,", 0)) {
+            save.add(w.trim());
+        }
+        Log.d("MISSION", "huhu Number : " + save.size() + " : quangkhanhcutesze1 = ");
+        if (save.size() == location) {
+            if (location == 1) {
+                editor.putString("scoreLevel1", String.valueOf(up) + ",0");
+                editor.commit();
+                Log.d("MISSION", "huhu Number : " + save.size() + " : quangkhanhcutesze = ");
+                Log.d("MISSION", "huhu Number : " + up + " : quangkhanhcuteup = ");
+            }else {
+                editor.putString("scoreLevel1", String.valueOf(up) +","+ positionBuntton.getString("scoreLevel1",""));
+                editor.commit();
+            }
+        }else {
+            String k = save.get(save.size()-2-i);
+            Log.d("MISSION", "huhu Number : " + k + " : quangkhanhcutek1 = ");
+            Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcutesave1 = ");
+            if (Integer.parseInt(k) > up){
+                int size = save.size()-2-i;
+                save.remove(size);
+                Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcutesave2 = ");
+                save.add(size, String.valueOf(up));
+                Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcutesave3 = ");
+                String f="";
+                for (int u = 0;u < save.size(); u++){
+                    f = f + save.get(u)+",";
+                }
+                editor.putString("scoreLevel1", f);
+                editor.commit();
+                Log.d("MISSION", "huhu Number : " + f + " : quangkhanhcutef = ");
+                Log.d("MISSION", "huhu Number : " + up + " : quangkhanhcuteup = ");
+            }
+        }
+
+        Log.d("MISSION", "huhu Number : " + save + " : quangkhanhcuteok = ");
+        Log.d("MISSION", "huhu Number : " + positionBuntton.getString("scoreLevel1","") + " : quangkhanhcuteupok = ");
+    }
+
     public void showNotice(Context context) {
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -266,27 +322,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = positionBuntton.edit();
-                    Log.d("MISSION", "huhu Number : " + positionBuntton.getString("myuser","") + " : level1 = ");
-                    if (positionBuntton.getString("myuser","").equals("1")){
-                        int tam = positionBuntton.getInt("level1",0);
-                        tam++;
-                        editor.putInt("level1", tam);
-                        Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level1",0) + " : level1 = ");
-                    }else if(positionBuntton.getString("myuser","").equals("2")){
-                        int tam = positionBuntton.getInt("level2",0);
-                        tam++;
-                        editor.putInt("level2", tam);
-                    }else{
-                        int tam = positionBuntton.getInt("level3",0);
-                        tam++;
-                        editor.putInt("level3", tam);
-                    }
-                    editor.commit();
-
-                    Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level2",0) + " : level2 = ");
-                    Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level3",0) + " : level3 = ");
+                    saveLevel();
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
                 }
@@ -295,6 +331,32 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             if (context instanceof Activity && !((Activity) context).isFinishing())
                 dialog.show();
         }
+    }
+
+    public void saveLevel(){
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        SharedPreferences.Editor editor = positionBuntton.edit();
+        if (positionBuntton.getString("myuser","").equals("1")){
+            if(i == positionBuntton.getInt("level1",0)) {
+                int tam = positionBuntton.getInt("level1", 0);
+                tam++;
+                editor.putInt("level1", tam);
+                Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level1", 0) + " : level1 = ");
+            }
+        }else if(positionBuntton.getString("myuser","").equals("2")){
+            if(i == positionBuntton.getInt("level2",0)) {
+                int tam = positionBuntton.getInt("level2", 0);
+                tam++;
+                editor.putInt("level2", tam);
+            }
+        }else{
+            if(i == positionBuntton.getInt("level3",0)) {
+                int tam = positionBuntton.getInt("level3", 0);
+                tam++;
+                editor.putInt("level3", tam);
+            }
+        }
+        editor.commit();
     }
 
 }
