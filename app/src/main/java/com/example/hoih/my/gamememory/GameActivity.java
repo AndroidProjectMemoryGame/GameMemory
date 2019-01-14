@@ -31,12 +31,13 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     ArrayList<Integer> arrayList1 = new ArrayList<>();
     ArrayList<Integer> arrayList2 = new ArrayList<>();
 
-    TextView tv_second_left, tv_second_right, tv_time;
+    TextView tv_second_left, tv_second_right, tv_time, tvOption;
     ImageButton btnBack;
     int time;
     int timeCountDownInterval = 1000;
     CountDownTimer cTimer;
     int up = -1;
+    String option;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         tv_time = (TextView)findViewById(R.id.tv_time);
         gridview = (GridView) findViewById(R.id.gridview);
         btnBack = (ImageButton) findViewById(R.id.btn_icon_back);
+        tvOption = (TextView)findViewById(R.id.txt_option);
         // handle back icon
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +71,10 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 time = 10000;
             }
         }
+        getOption();
+        tvOption.setText(option);
+
+
 
         // Start timer
         startTimer(time);
@@ -228,7 +234,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                             default: saveScore(5);
 
                         }
-                        showNotice(this);
 
                     }
                     check = false;
@@ -279,6 +284,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.putString("scoreLevel1", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel1", ""));
                     editor.commit();
                 }
+                dialogNewRecore(this);
+
             } else {
                 String k = save.get(save.size() - 2 - i);
                 if (Integer.parseInt(k) > up) {
@@ -291,6 +298,9 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     }
                     editor.putString("scoreLevel1", f);
                     editor.commit();
+                    dialogNewRecore(this);
+                }else {
+                    showNotice(this);
                 }
             }
         }else if (positionBuntton.getString("myuser","").equals("2")){
@@ -305,6 +315,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.putString("scoreLevel2", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel2", ""));
                     editor.commit();
                 }
+                dialogNewRecore(this);
             } else {
                 String k = save.get(save.size() - 2 - i);
                 if (Integer.parseInt(k) > up) {
@@ -317,6 +328,9 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     }
                     editor.putString("scoreLevel2", f);
                     editor.commit();
+                    dialogNewRecore(this);
+                }else {
+                    showNotice(this);
                 }
             }
         }else {
@@ -331,6 +345,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.putString("scoreLevel3", String.valueOf(up) + "," + positionBuntton.getString("scoreLevel3", ""));
                     editor.commit();
                 }
+                dialogNewRecore(this);
             } else {
                 String k = save.get(save.size() - 2 - i);
                 if (Integer.parseInt(k) > up) {
@@ -343,6 +358,9 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     }
                     editor.putString("scoreLevel3", f);
                     editor.commit();
+                    dialogNewRecore(this);
+                }else {
+                    showNotice(this);
                 }
             }
         }
@@ -359,6 +377,40 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             alertDialogBuilder.setCancelable(false);
             final AlertDialog dialog = alertDialogBuilder.create();
             Button btnGo = (Button) view.findViewById(R.id.btn_end);
+
+
+            btnGo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent back = new Intent(GameActivity.this,ModeActivity.class);
+                    startActivity(back);
+                }
+            });
+            //   txtMessage.setText(message);
+            if (context instanceof Activity && !((Activity) context).isFinishing())
+                dialog.show();
+        }
+    }
+
+    public void dialogNewRecore(Context context) {
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    context);
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.dialog_new_record, null);
+            alertDialogBuilder.setView(view);
+            alertDialogBuilder.setCancelable(false);
+            final AlertDialog dialog = alertDialogBuilder.create();
+
+            TextView tvScore = (TextView)view.findViewById(R.id.tv_score);
+            TextView tvOption = (TextView)view.findViewById(R.id.tv_option);
+            TextView tvLevel = (TextView)view.findViewById(R.id.tv_level);
+            Button btnGo = (Button) view.findViewById(R.id.btn_ok);
+
+            tvOption.setText(option);
+            tvScore.setText("Score: "+up +"s");
+            tvLevel.setText("Level"+(i+1));
 
 
             btnGo.setOnClickListener(new View.OnClickListener() {
@@ -401,4 +453,15 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         editor.commit();
     }
 
+    public void getOption(){
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        if (positionBuntton.getString("myuser","").equals("1")){
+            option = "NO LIMIT TIME";
+        }else if(positionBuntton.getString("myuser","").equals("2")){
+            option = "NORMAL";
+        }else{
+            option = "HARD";
+        }
+
+    }
 }
