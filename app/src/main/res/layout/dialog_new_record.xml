@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center">
@@ -14,7 +14,7 @@
         >
         <TextView
             android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Record!"
             android:textColor="#fff"
@@ -23,28 +23,32 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="200dp"
+        android:id="@+id/tv_option"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
         android:text="NO TIME LIMIT"/>
     <TextView
-        android:layout_width="200dp"
+        android:id="@+id/tv_score"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
         android:text="4 s"/>
     <TextView
-        android:layout_width="200dp"
+        android:id="@+id/tv_level"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
         android:text="LEVEL 1"/>
     <TextView
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
         android:layout_marginBottom="10dp"
         android:text="WELL DONE"/>
 
     <Button
+        android:id="@+id/btn_ok"
         android:layout_width="50dp"
         android:layout_height="30dp"
         android:text="OK"
