@@ -264,7 +264,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                             public void onFinish() {
                                 arrayList2.remove(a);
                                 arrayList2.add(a, test[0]);
-                                Log.d("MISSION", "huhu" + a + "Number : " + gan + " : quangkhanhhahaha = ");
                                 arrayList2.remove(gan);
                                 arrayList2.add(gan, test[0]);
                                 Log.d("MISSION", "Number : " + arrayList2 + " : quangkhanhhahaha = ");
