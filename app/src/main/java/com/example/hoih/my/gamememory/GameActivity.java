@@ -24,8 +24,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
     String goi;
-    int i, count =0, gan, pos, add1 =5, add2 =5;
-    boolean check;
+    int i, count =0, gan, pos=-1, add1 =5, add2 =5;
+    boolean check = true;
 
     ArrayList<Integer> arrayPos = new ArrayList<>();
     ArrayList<Integer> arrayList1 = new ArrayList<>();
@@ -172,7 +172,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
             public void onTick(long millisUntilFinished) {
                 SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-               if(positionBuntton.getString("myuser","").equals("2")){
+                if(positionBuntton.getString("myuser","").equals("1")) {
+                }else if(positionBuntton.getString("myuser","").equals("2")){
                     if (up == 10) {
                         dialogGameOver(GameActivity.this);
                         cTimer.cancel();
@@ -220,6 +221,10 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     break;
                 }
             }
+
+            if(position == pos){
+                compare = false;
+            }
             if (compare) {
                 if (count == 0) {
                     gan = mang.get(position);
@@ -232,6 +237,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 gridview.setAdapter(new GameAdapter(arrayList2, GameActivity.this, i, GameActivity.this, mang));
                 count++;
                 if (count == 2) {
+                    check = false;
                     if (arrayList2.equals(arrayList1)){
                         cTimer.cancel();
                         Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
@@ -252,14 +258,11 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
                         }
 
-                    }
-                    check = false;
-                    if (!arrayList1.get(mang.get(position)).equals(arrayList1.get(gan))) {
+                    }else if (!arrayList1.get(mang.get(position)).equals(arrayList1.get(gan))) {
                         new CountDownTimer(1300, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
                             }
-
                             @Override
                             public void onFinish() {
                                 arrayList2.remove(a);
@@ -273,7 +276,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                         }.start();
                     } else {
                         add1 += 5;
-                        add2 += add1;
+                        add2 += 5;
                         arrayPos.add(pos);
                         arrayPos.add(position);
                         check=true;
