@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
     String goi;
-    int i, count =0, gan, pos;
+    int i, count =0, gan, pos, add1 =5, add2 =5;
     boolean check;
 
     ArrayList<Integer> arrayPos = new ArrayList<>();
@@ -87,14 +87,12 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         new CountDownTimer(time, timeCountDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
-                Log.d("MISSION", "Number : " + arrayList1 + " : quangkhanhthum1 = ");
             }
 
             @Override
             public void onFinish() {
                 check=true;
                 gridview.setAdapter(new GameAdapter(arrayList2,GameActivity.this,i,GameActivity.this,randomArray()));
-                Log.d("MISSION", "Number : " + arrayList1 + " : quangkhanhthum2 = ");
             }
         }.start();
 
@@ -150,6 +148,10 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         }
     }
 
+
+
+
+
     public void startTimer(int time) {
         new CountDownTimer(time, timeCountDownInterval) {
 
@@ -158,8 +160,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             }
 
             public void onFinish() {
-                tv_second_left.setText("0");
                 getCountUpTimer(Integer.MAX_VALUE);
+
             }
         }.start();
     }
@@ -169,16 +171,32 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         cTimer = new CountDownTimer(timeCountUp, timeCountDownInterval) {
 
             public void onTick(long millisUntilFinished) {
+                SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+               if(positionBuntton.getString("myuser","").equals("2")){
+                    if (up == 10) {
+                        dialogGameOver(GameActivity.this);
+                        cTimer.cancel();
+                    }
+                    tv_second_right.setText("30");
+                }else{
+                   if(add1 == 0) {
+                       dialogGameOver(GameActivity.this);
+                       cTimer.cancel();
+                   }
+                   tv_second_right.setText(String.valueOf(add2));
+                   add1--;
+                }
                 up++;
                 tv_second_left.setText("" +up);
             }
-
             public void onFinish() {
                 cTimer.cancel();
             }
         };
         cTimer.start();
     }
+
+
 
     public ArrayList<Integer> randomArray() {
         Random rand = new Random();
@@ -217,7 +235,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     if (arrayList2.equals(arrayList1)){
                         cTimer.cancel();
                         Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
-
                         switch (i) {
                             case 0:
                                 saveScore(1);
@@ -256,6 +273,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                             }
                         }.start();
                     } else {
+                        add1 += 5;
+                        add2 += add1;
                         arrayPos.add(pos);
                         arrayPos.add(position);
                         check=true;
@@ -300,7 +319,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.commit();
                     dialogNewRecore(this);
                 }else {
-                    showNotice(this);
+                    dialogComplete(this);
                 }
             }
         }else if (positionBuntton.getString("myuser","").equals("2")){
@@ -330,7 +349,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.commit();
                     dialogNewRecore(this);
                 }else {
-                    showNotice(this);
+                    dialogComplete(this);
                 }
             }
         }else {
@@ -360,13 +379,13 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     editor.commit();
                     dialogNewRecore(this);
                 }else {
-                    showNotice(this);
+                    dialogComplete(this);
                 }
             }
         }
     }
 
-    public void showNotice(Context context) {
+    public void dialogComplete(Context context) {
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     context);
@@ -417,6 +436,42 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 @Override
                 public void onClick(View v) {
                     saveLevel();
+                    Intent back = new Intent(GameActivity.this,ModeActivity.class);
+                    startActivity(back);
+                }
+            });
+            //   txtMessage.setText(message);
+            if (context instanceof Activity && !((Activity) context).isFinishing())
+                dialog.show();
+        }
+    }
+
+    public void dialogGameOver(Context context) {
+        if (context instanceof Activity && !((Activity) context).isFinishing()) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    context);
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = inflater.inflate(R.layout.dialog_game_over, null);
+            alertDialogBuilder.setView(view);
+            alertDialogBuilder.setCancelable(false);
+            final AlertDialog dialog = alertDialogBuilder.create();
+
+
+            Button btnOK = (Button) view.findViewById(R.id.btn_ok);
+            Button btnCancel = (Button) view.findViewById(R.id.btn_cancel);
+
+
+            btnOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = getIntent();
+                    startActivity(intent);
+                }
+            });
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
                 }
