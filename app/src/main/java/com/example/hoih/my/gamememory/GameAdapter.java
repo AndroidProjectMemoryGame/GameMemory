@@ -1,19 +1,13 @@
 package com.example.hoih.my.gamememory;
 
 import android.content.Context;
-import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class GameAdapter extends BaseAdapter {
     private ArrayList<Integer> listData;
@@ -51,18 +45,22 @@ public class GameAdapter extends BaseAdapter {
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
             buttonView = new ImageButton(context);
-            if(pos <4){
-                buttonView.setLayoutParams(new ViewGroup.LayoutParams(150, 150));
-            }
-
-            else if(pos == 4){
+            if(pos <= 4){
                 buttonView.setLayoutParams(new ViewGroup.LayoutParams(140, 140));
             }
-            else buttonView.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
 
+            else if(pos > 4 && pos < 6){
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(140, 140));
+            }else if(pos == 6){
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(130, 130));
+            }
+            else if(pos > 6 && pos <=8){
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(110, 110));
+            }else {
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(90, 90));
+            }
             buttonView.setBackgroundResource(R.drawable.border_game);
             buttonView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            buttonView.setPadding(2, 2, 2, 2);
         } else {
             buttonView = (ImageButton) convertView;
         }
