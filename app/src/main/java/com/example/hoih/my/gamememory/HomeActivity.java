@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -109,5 +110,9 @@ public class HomeActivity extends Activity {
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,shareBody);
         startActivity(Intent.createChooser(shareIntent,"Share via"));
 
+    }
+    public void moreGame(View view) {
+
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=%3CGame%3E&c=apps")));
     }
 }
