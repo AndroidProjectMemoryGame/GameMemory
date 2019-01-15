@@ -22,6 +22,8 @@ public class HomeActivity extends Activity {
     private Button btnSoundStart;
     private Button btnSoundStop;
     private MediaPlayer mediaPlayer;
+    Intent shareIntent;
+    String shareBody = "this is great app";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -100,4 +102,12 @@ public class HomeActivity extends Activity {
 
     }
 
+    public void share(View view) {
+        shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+        shareIntent.setType("text/pain");
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"My app");
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,shareBody);
+        startActivity(Intent.createChooser(shareIntent,"Share via"));
+
+    }
 }
