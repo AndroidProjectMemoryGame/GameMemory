@@ -5,18 +5,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ImageButton;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -73,6 +74,16 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         }
         getOption();
         tvOption.setText(option);
+        if(i <4){
+            gridview.setHorizontalSpacing(20);
+        }
+
+        else if(i == 4){
+            gridview.setHorizontalSpacing(20);
+        }
+        else {
+            gridview.setHorizontalSpacing(10);
+        }
 
 
 
@@ -141,16 +152,24 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
     private void setData(){
         for (int j = 0; j < 2; j++) {
-            for (int  u = 0;u < ((i + 2) * 2) / 2; u++) {
+            for (int  u = 0;u < (4 * (i+1)) / 2; u++) {
                 arrayList1.add(mThumbIds[u]);
                 arrayList2.add(test[0]);
             }
         }
     }
 
+    public ArrayList<Integer> randomArray() {
+        Random rand = new Random();
+        while (mang.size() < (4*(i+1))) {
 
-
-
+            int random = rand.nextInt((4*(i+1)));
+            if (!mang.contains(random)) {
+                mang.add(random);
+            }
+        }
+        return mang;
+    }
 
     public void startTimer(int time) {
         new CountDownTimer(time, timeCountDownInterval) {
@@ -195,20 +214,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             }
         };
         cTimer.start();
-    }
-
-
-
-    public ArrayList<Integer> randomArray() {
-        Random rand = new Random();
-        while (mang.size() < (i + 2) * 2) {
-
-            int random = rand.nextInt((i + 2) * 2);
-            if (!mang.contains(random)) {
-                mang.add(random);
-            }
-        }
-        return mang;
     }
 
     @Override
