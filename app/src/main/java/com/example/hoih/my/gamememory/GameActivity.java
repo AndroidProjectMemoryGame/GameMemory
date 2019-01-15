@@ -193,7 +193,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
                 if(positionBuntton.getString("myuser","").equals("1")) {
                 }else if(positionBuntton.getString("myuser","").equals("2")){
-                    if (up == 10) {
+                    if (up == 30) {
                         dialogGameOver(GameActivity.this);
                         cTimer.cancel();
                     }
@@ -259,7 +259,25 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                             case 3 :
                                 saveScore(4);
                                 break;
-                            default: saveScore(5);
+                            case 4 :
+                                saveScore(5);
+                                break;
+                            case 5 :
+                                saveScore(6);
+                                break;
+                            case 6 :
+                                saveScore(7);
+                                break;
+                            case 7 :
+                                saveScore(8);
+                                break;
+                            case 8 :
+                                saveScore(9);
+                                break;
+                            case 9 :
+                                saveScore(10);
+                                break;
+                            default: saveScore(11);
 
                         }
 
