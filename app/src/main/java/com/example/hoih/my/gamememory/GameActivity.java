@@ -277,7 +277,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                                 Log.d("MISSION", "Number : " + arrayList2 + " : quangkhanhhahaha = ");
                                 gridview.setAdapter(new GameAdapter(arrayList2, GameActivity.this, i, GameActivity.this, mang));
                                 check =true;
-                                pos=-1;
+                                pos = -1;
                             }
                         }.start();
                     } else {
