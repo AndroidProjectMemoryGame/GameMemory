@@ -21,7 +21,6 @@
             android:layout_height="match_parent"
             android:src="@drawable/icon_back"
             android:background="#009788"
-            android:layout_weight="1"
             />
         <TextView
             android:id="@+id/tv_time"
@@ -73,7 +72,7 @@
             android:layout_height="match_parent"
             android:text="NO LIMIT TIME"
             android:textColor="#fff"
-            android:layout_weight="3.5"
+            android:layout_weight="4.5"
             android:layout_toRightOf="@+id/txt_time"
             android:layout_toLeftOf="@+id/btn_music"
             android:textSize="14dp"/>

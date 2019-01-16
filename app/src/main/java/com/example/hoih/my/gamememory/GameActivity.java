@@ -124,6 +124,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         else {
             gridview.setHorizontalSpacing(10);
         }
+        tv_second_right.setText(String.valueOf(time/1000));
 
 
 
@@ -240,7 +241,9 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             public void onTick(long millisUntilFinished) {
                 SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
                 if(positionBuntton.getString("myuser","").equals("1")) {
+                    tv_second_right.setText("0");
                 }else if(positionBuntton.getString("myuser","").equals("2")){
+                    tv_second_right.setText("0");
                     if (up == 30) {
                         dialogGameOver(GameActivity.this);
                         cTimer.cancel();
