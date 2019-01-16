@@ -22,9 +22,9 @@ public class HomeActivity extends Activity {
 
     private Button btnSoundStart;
     private Button btnSoundStop;
-    private MediaPlayer mediaPlayer;
+    public MediaPlayer mediaPlayer;
     Intent shareIntent;
-    String shareBody = "this is great app";
+    String shareBody = "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class HomeActivity extends Activity {
         int duration = mediaPlayer.getDuration();
         int currentPosition = mediaPlayer.getCurrentPosition();
         mediaPlayer.start();
+        mediaPlayer.setLooping(true);
         btnSoundStop.setVisibility(View.GONE);
 
 
@@ -91,7 +92,6 @@ public class HomeActivity extends Activity {
         mediaPlayer.start();
         btnSoundStop.setVisibility(View.GONE);
         btnSoundStart.setVisibility(View.VISIBLE);
-
     }
 
 
@@ -99,8 +99,6 @@ public class HomeActivity extends Activity {
         mediaPlayer.pause();
         btnSoundStop.setVisibility(View.VISIBLE);
         btnSoundStart.setVisibility(View.GONE);
-
-
     }
 
     public void share(View view) {
@@ -109,10 +107,14 @@ public class HomeActivity extends Activity {
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"My app");
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,shareBody);
         startActivity(Intent.createChooser(shareIntent,"Share via"));
-
     }
     public void moreGame(View view) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=%3Cgame%3E&c=apps")));
+    }
 
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=%3CGame%3E&c=apps")));
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mediaPlayer.pause();
     }
 }

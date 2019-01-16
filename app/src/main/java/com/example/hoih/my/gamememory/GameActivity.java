@@ -54,6 +54,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(GameActivity.this, ModeActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -429,6 +431,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 public void onClick(View v) {
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             //   txtMessage.setText(message);
@@ -455,7 +459,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
             tvOption.setText(option);
             tvScore.setText("Score: "+up +"s");
-            tvLevel.setText("Level"+(i+1));
+            tvLevel.setText("Level "+(i+1));
 
 
             btnGo.setOnClickListener(new View.OnClickListener() {
@@ -464,6 +468,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     saveLevel();
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             //   txtMessage.setText(message);
@@ -493,6 +499,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 public void onClick(View v) {
                     Intent intent = getIntent();
                     startActivity(intent);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -500,6 +508,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 public void onClick(View v) {
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             //   txtMessage.setText(message);
