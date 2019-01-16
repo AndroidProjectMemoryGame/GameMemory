@@ -36,7 +36,8 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
             @Override
             public void onClick(View v) {
 
-                finish();
+                Intent back = new Intent(ModeActivity.this,HomeActivity.class);
+                startActivity(back);
 
             }
         });

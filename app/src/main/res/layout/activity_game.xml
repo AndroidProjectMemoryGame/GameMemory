@@ -21,6 +21,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/icon_back"
             android:background="#009788"
+            android:layout_weight="1"
             />
         <TextView
             android:id="@+id/tv_time"
@@ -42,7 +43,8 @@
             android:text="0"
             android:textColor="#fff"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_weight="0.2"/>
         <TextView
             android:id="@+id/txt_time"
             android:layout_width="wrap_content"
@@ -51,7 +53,8 @@
             android:textColor="#fff"
             android:textStyle="bold"
             android:gravity="center"
-            android:textSize="15dp"/>
+            android:textSize="15dp"
+            android:layout_weight="0.1"/>
         <TextView
             android:id="@+id/tv_second_right"
             android:layout_width="wrap_content"
@@ -60,7 +63,8 @@
             android:text="0"
             android:textColor="#fff"
             android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_weight="0.2"/>
 
         <TextView
             android:id="@+id/txt_option"
@@ -69,25 +73,23 @@
             android:layout_height="match_parent"
             android:text="NO LIMIT TIME"
             android:textColor="#fff"
-            android:layout_weight="4.5"
+            android:layout_weight="3.5"
             android:layout_toRightOf="@+id/txt_time"
             android:layout_toLeftOf="@+id/btn_music"
             android:textSize="14dp"/>
         <Button
             android:id="@+id/btn_sound_start"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/btn_music"
+            android:background="@drawable/sound_on"
             android:layout_alignParentRight="true"
-            android:drawableRight="@drawable/icon_music"
             android:onClick="doStop"/>
         <Button
             android:id="@+id/btn_sound_stop"
-            android:layout_width="65dp"
+            android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/btn_music"
+            android:background="@drawable/sound_off"
             android:layout_alignParentRight="true"
-            android:text="open"
             android:textColor="#fff"
             android:onClick="doStart"/>
     </LinearLayout>
