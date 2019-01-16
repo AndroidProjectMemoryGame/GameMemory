@@ -78,12 +78,14 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             mediaPlayer.start();
             mediaPlayer.setLooping(true);
             btnSoundStop.setVisibility(View.GONE);
+            mediaPlayer.setLooping(true);
 
         }else {
             if (positionBuntton.getString("sound","").equals("1")){
                 mediaPlayer.start();
                 mediaPlayer.setLooping(true);
                 btnSoundStop.setVisibility(View.GONE);
+                mediaPlayer.setLooping(true);
             }else {
                 mediaPlayer.pause();
                 btnSoundStop.setVisibility(View.VISIBLE);
@@ -623,6 +625,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
         SharedPreferences.Editor editor = positionBuntton.edit();
         mediaPlayer.start();
+        mediaPlayer.setLooping(true);
         btnSoundStop.setVisibility(View.GONE);
         btnSoundStart.setVisibility(View.VISIBLE);
         sound = true;
@@ -642,7 +645,13 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         super.onRestart();
         if(sound){
             mediaPlayer.start();
+            mediaPlayer.setLooping(true);
         }
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
     }
 }
