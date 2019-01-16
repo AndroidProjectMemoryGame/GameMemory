@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
     String goi;
-    int i, count =0, gan, pos=-1, add1 =5, add2 =5;
+    int i, count =0, gan, pos=-1, add1 =5, add2 =5, diem;
     boolean check = true;
     private Button btnSoundStart;
     private Button btnSoundStop;
@@ -638,6 +638,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     protected void onStop() {
         super.onStop();
         mediaPlayer.pause();
+        diem = up;
+
     }
 
     @Override
@@ -647,11 +649,18 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             mediaPlayer.start();
             mediaPlayer.setLooping(true);
         }
+        up = diem;
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        up = diem;
     }
 }
