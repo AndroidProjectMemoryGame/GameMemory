@@ -36,8 +36,7 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
             @Override
             public void onClick(View v) {
 
-                Intent back = new Intent(ModeActivity.this,HomeActivity.class);
-                startActivity(back);
+                finish();
 
             }
         });
@@ -206,7 +205,6 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
                     i.putExtra("pos", position);
                     startActivity(i);
                     Log.d("MISSION", "Number : " + position + " : succeed1 = "  );
-                    finish();
                 }
             });
             //   txtMessage.setText(message);

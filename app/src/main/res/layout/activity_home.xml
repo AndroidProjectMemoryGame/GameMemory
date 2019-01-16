@@ -19,23 +19,6 @@
             android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"/>
-        <Button
-            android:id="@+id/btn_sound_start"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:background="@drawable/btn_music"
-            android:layout_alignParentRight="true"
-            android:drawableRight="@drawable/icon_music"
-            android:onClick="doStop"/>
-        <Button
-            android:id="@+id/btn_sound_stop"
-            android:layout_width="65dp"
-            android:layout_height="40dp"
-            android:background="@drawable/btn_music"
-            android:layout_alignParentRight="true"
-            android:text="open"
-            android:textColor="#fff"
-            android:onClick="doStart"/>
     </RelativeLayout>
 
     <LinearLayout
