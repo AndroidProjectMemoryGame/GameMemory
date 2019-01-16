@@ -19,12 +19,8 @@ public class HomeActivity extends Activity {
 
     Button btnNormal, btnNoLimitTime, btnHard;
     ArrayList<Integer> mang = new ArrayList<>();
-
-    private Button btnSoundStart;
-    private Button btnSoundStop;
-    private MediaPlayer mediaPlayer;
     Intent shareIntent;
-    String shareBody = "this is great app";
+    String shareBody = "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,16 +29,6 @@ public class HomeActivity extends Activity {
         btnNormal = (Button)findViewById(R.id.btn_normal);
         btnNoLimitTime = (Button)findViewById(R.id.btn_no_limit_time);
         btnHard = (Button)findViewById(R.id.btn_hard);
-
-        btnSoundStart= (Button) this.findViewById(R.id.btn_sound_start);
-        btnSoundStop= (Button) this.findViewById(R.id.btn_sound_stop);
-        int songId = this.getRawResIdByName("song");
-        this.mediaPlayer=   MediaPlayer.create(this, songId);
-
-        int duration = mediaPlayer.getDuration();
-        int currentPosition = mediaPlayer.getCurrentPosition();
-        mediaPlayer.start();
-        btnSoundStop.setVisibility(View.GONE);
 
 
         btnNoLimitTime.setOnClickListener(new View.OnClickListener() {
@@ -78,30 +64,7 @@ public class HomeActivity extends Activity {
         editor.commit();
     }
 
-    // Tìm ID của một file nguồn trong thư mục 'raw' theo tên.
-    public int getRawResIdByName(String resName)  {
-        String pkgName = this.getPackageName();
-        int resID = this.getResources().getIdentifier(resName, "raw", pkgName);
-        return resID;
-    }
 
-    public void doStart(View view) {
-        int duration = mediaPlayer.getDuration();
-        int currentPosition = mediaPlayer.getCurrentPosition();
-        mediaPlayer.start();
-        btnSoundStop.setVisibility(View.GONE);
-        btnSoundStart.setVisibility(View.VISIBLE);
-
-    }
-
-
-    public void doStop(View view) {
-        mediaPlayer.pause();
-        btnSoundStop.setVisibility(View.VISIBLE);
-        btnSoundStart.setVisibility(View.GONE);
-
-
-    }
 
     public void share(View view) {
         shareIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -109,10 +72,9 @@ public class HomeActivity extends Activity {
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"My app");
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,shareBody);
         startActivity(Intent.createChooser(shareIntent,"Share via"));
-
     }
     public void moreGame(View view) {
-
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=%3CGame%3E&c=apps")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=%3Cgame%3E&c=apps")));
     }
+
 }

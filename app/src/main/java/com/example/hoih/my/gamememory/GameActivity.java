@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -25,8 +26,13 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     GridView gridview;
     ArrayList<Integer> mang = new ArrayList<>();
     String goi;
-    int i, count =0, gan, pos=-1, add1 =5, add2 =5;
+    int i, count =0, gan, pos=-1, add1 =5, add2 =5, diem;
     boolean check = true;
+    private Button btnSoundStart;
+    private Button btnSoundStop;
+    public MediaPlayer mediaPlayer;
+
+    boolean sound;
 
     ArrayList<Integer> arrayPos = new ArrayList<>();
     ArrayList<Integer> arrayList1 = new ArrayList<>();
@@ -54,9 +60,45 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(GameActivity.this, ModeActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
+
+        btnSoundStart= (Button) this.findViewById(R.id.btn_sound_start);
+        btnSoundStop= (Button) this.findViewById(R.id.btn_sound_stop);
+        int songId = this.getRawResIdByName("song");
+        this.mediaPlayer=   MediaPlayer.create(this, songId);
+        int duration = mediaPlayer.getDuration();
+        int currentPosition = mediaPlayer.getCurrentPosition();
+
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        if (positionBuntton.getString("sound","").equals("")){
+            mediaPlayer.start();
+            mediaPlayer.setLooping(true);
+            btnSoundStop.setVisibility(View.GONE);
+            mediaPlayer.setLooping(true);
+
+        }else {
+            if (positionBuntton.getString("sound","").equals("1")){
+                mediaPlayer.start();
+                mediaPlayer.setLooping(true);
+                btnSoundStop.setVisibility(View.GONE);
+                mediaPlayer.setLooping(true);
+            }else {
+                mediaPlayer.pause();
+                btnSoundStop.setVisibility(View.VISIBLE);
+                btnSoundStart.setVisibility(View.GONE);
+                sound = false;
+            }
+        }
+
+
+        sound = true;
+
+
+
 
         Intent intent = getIntent();
         i = Integer.parseInt(intent.getStringExtra("pos"));
@@ -84,6 +126,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         else {
             gridview.setHorizontalSpacing(10);
         }
+        tv_second_right.setText(String.valueOf(time/1000));
 
 
 
@@ -121,6 +164,14 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
 
     }
+
+    // Tìm ID của một file nguồn trong thư mục 'raw' theo tên.
+    public int getRawResIdByName(String resName)  {
+        String pkgName = this.getPackageName();
+        int resID = this.getResources().getIdentifier(resName, "raw", pkgName);
+        return resID;
+    }
+
     private Integer[] mThumbIds=
             {
                     R.drawable.card1,
@@ -192,7 +243,9 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             public void onTick(long millisUntilFinished) {
                 SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
                 if(positionBuntton.getString("myuser","").equals("1")) {
+                    tv_second_right.setText("0");
                 }else if(positionBuntton.getString("myuser","").equals("2")){
+                    tv_second_right.setText("0");
                     if (up == 30) {
                         dialogGameOver(GameActivity.this);
                         cTimer.cancel();
@@ -429,6 +482,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 public void onClick(View v) {
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             //   txtMessage.setText(message);
@@ -455,7 +510,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
             tvOption.setText(option);
             tvScore.setText("Score: "+up +"s");
-            tvLevel.setText("Level"+(i+1));
+            tvLevel.setText("Level "+(i+1));
 
 
             btnGo.setOnClickListener(new View.OnClickListener() {
@@ -464,6 +519,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     saveLevel();
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             //   txtMessage.setText(message);
@@ -493,6 +550,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 public void onClick(View v) {
                     Intent intent = getIntent();
                     startActivity(intent);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -500,6 +559,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 public void onClick(View v) {
                     Intent back = new Intent(GameActivity.this,ModeActivity.class);
                     startActivity(back);
+                    dialog.dismiss();
+                    finish();
                 }
             });
             //   txtMessage.setText(message);
@@ -544,5 +605,62 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             option = "HARD";
         }
 
+    }
+
+    public void doStop(View view) {
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        SharedPreferences.Editor editor = positionBuntton.edit();
+        mediaPlayer.pause();
+        btnSoundStop.setVisibility(View.VISIBLE);
+        btnSoundStart.setVisibility(View.GONE);
+        sound = false;
+        editor.putString("sound","2");
+        editor.commit();
+    }
+    public void doStart(View view) {
+        int songId = this.getRawResIdByName("song");
+        this.mediaPlayer=   MediaPlayer.create(this, songId);
+        int duration = mediaPlayer.getDuration();
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
+        SharedPreferences.Editor editor = positionBuntton.edit();
+        mediaPlayer.start();
+        mediaPlayer.setLooping(true);
+        btnSoundStop.setVisibility(View.GONE);
+        btnSoundStart.setVisibility(View.VISIBLE);
+        sound = true;
+        editor.putString("sound","1");
+        editor.commit();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mediaPlayer.pause();
+        diem = up;
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(sound){
+            mediaPlayer.start();
+            mediaPlayer.setLooping(true);
+        }
+        up = diem;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        up = diem;
     }
 }
