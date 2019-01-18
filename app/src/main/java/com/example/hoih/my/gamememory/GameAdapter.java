@@ -26,7 +26,11 @@ public class GameAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return listData.size();
+        if (listData.size() < 40) {
+            return listData.size();
+        }else{
+            return 40;
+        }
     }
 
     @Override
@@ -54,10 +58,14 @@ public class GameAdapter extends BaseAdapter {
             }else if(pos == 6){
                 buttonView.setLayoutParams(new ViewGroup.LayoutParams(130, 130));
             }
-            else if(pos > 6 && pos <=8){
+            else if(pos ==7){
                 buttonView.setLayoutParams(new ViewGroup.LayoutParams(110, 110));
+            }else if(pos == 8){
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(95, 95));
+            }else if(pos ==9){
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(75, 75));
             }else {
-                buttonView.setLayoutParams(new ViewGroup.LayoutParams(90, 90));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(50, 50));
             }
             buttonView.setBackgroundResource(R.drawable.border_game);
             buttonView.setScaleType(ImageView.ScaleType.CENTER_CROP);
