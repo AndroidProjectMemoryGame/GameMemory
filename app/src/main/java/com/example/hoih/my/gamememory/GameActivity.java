@@ -119,13 +119,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         if(i <4){
             gridview.setHorizontalSpacing(20);
         }
-
-        else if(i == 4){
-            gridview.setHorizontalSpacing(20);
-        }
-        else {
-            gridview.setHorizontalSpacing(10);
-        }
+        
         tv_second_right.setText(String.valueOf(time/1000));
 
 
