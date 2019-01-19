@@ -190,28 +190,32 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             };
 
     private void setData(){
-        SharedPreferences positionMode = getSharedPreferences("myprefer", MODE_PRIVATE);
-        if (positionMode.getString("myuser", "").equals("1")) {
-            for (int j = 0; j < 2; j++) {
-                for (int  u = 0;u < (4 * (i+1)) / 2; u++) {
-                    arrayList1.add(mThumbIds[u]);
-                    arrayList2.add(test[0]);
-                }
-            }
-        } else {
-            for (int j = 0; j < 2; j++) {
-                for (int  u = 0;u < (8 * (i+1)) / 2; u++) {
-                    arrayList1.add(mThumbIds[u]);
-                    arrayList2.add(test[0]);
-                }
+        for (int j = 0; j < 2; j++) {
+            for (int  u = 0;u < (4 * (i+1)) / 2; u++) {
+                arrayList1.add(mThumbIds[u]);
+                arrayList2.add(test[0]);
             }
         }
+//        SharedPreferences positionMode = getSharedPreferences("myprefer", MODE_PRIVATE);
+//        if (positionMode.getString("myuser", "").equals("1")) {
+//            for (int j = 0; j < 2; j++) {
+//                for (int  u = 0;u < (4 * (i+1)) / 2; u++) {
+//                    arrayList1.add(mThumbIds[u]);
+//                    arrayList2.add(test[0]);
+//                }
+//            }
+//        } else {
+//            for (int j = 0; j < 2; j++) {
+//                for (int  u = 0;u < (8 * (i+1)) / 2; u++) {
+//                    arrayList1.add(mThumbIds[u]);
+//                    arrayList2.add(test[0]);
+//                }
+//            }
+//        }
     }
 
     public ArrayList<Integer> randomArray() {
-        SharedPreferences positionMode = getSharedPreferences("myprefer", MODE_PRIVATE);
-        if (positionMode.getString("myuser", "").equals("1")) {
-            Random rand = new Random();
+        Random rand = new Random();
             while (mang.size() < (4*(i+1))) {
                 int random = rand.nextInt((4*(i+1)));
                 if (!mang.contains(random)) {
@@ -219,16 +223,26 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 }
             }
             return mang;
-        } else {
-            Random rand = new Random();
-            while (mang.size() < (8*(i+1))) {
-                int random = rand.nextInt((8*(i+1)));
-                if (!mang.contains(random)) {
-                    mang.add(random);
-                }
-            }
-            return mang;
-        }
+//        SharedPreferences positionMode = getSharedPreferences("myprefer", MODE_PRIVATE);
+//        if (positionMode.getString("myuser", "").equals("1")) {
+//            Random rand = new Random();
+//            while (mang.size() < (4*(i+1))) {
+//                int random = rand.nextInt((4*(i+1)));
+//                if (!mang.contains(random)) {
+//                    mang.add(random);
+//                }
+//            }
+//            return mang;
+//        } else {
+//            Random rand = new Random();
+//            while (mang.size() < (8*(i+1))) {
+//                int random = rand.nextInt((8*(i+1)));
+//                if (!mang.contains(random)) {
+//                    mang.add(random);
+//                }
+//            }
+//            return mang;
+//        }
     }
 
     public void startTimer(int time) {
