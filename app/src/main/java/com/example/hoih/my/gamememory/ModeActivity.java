@@ -35,10 +35,9 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
         txtIconBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent back = new Intent(ModeActivity.this,HomeActivity.class);
                 startActivity(back);
-
+                finish();
             }
         });
         getMode();
@@ -126,9 +125,6 @@ public class ModeActivity extends Activity implements ListLevelAdapter.OnClickLi
             }
         return data4;
     }
-
-
-
 
     @Override
     public void selectLevel(int position) {

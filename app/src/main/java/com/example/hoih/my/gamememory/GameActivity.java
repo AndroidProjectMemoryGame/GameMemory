@@ -94,24 +94,20 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             }
         }
 
-
         sound = true;
-
-
-
 
         Intent intent = getIntent();
         i = Integer.parseInt(intent.getStringExtra("pos"));
 
         if (getIntent() != null) {
             if (getIntent().getIntExtra("levelSelected", 0) == 5) {
-                time = 5000;
+                time = 6000;
             }
             if (getIntent().getIntExtra("levelSelected", 0) == 7) {
-                time = 7000;
+                time = 8000;
             }
             if (getIntent().getIntExtra("levelSelected", 0) == 10){
-                time = 10000;
+                time = 11000;
             }
         }
         getOption();
@@ -119,10 +115,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         if(i <4){
             gridview.setHorizontalSpacing(20);
         }
-        
-        tv_second_right.setText(String.valueOf(time/1000));
-
-
 
         // Start timer
         startTimer(time);
@@ -131,6 +123,14 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         randomArray();
         gridview.setAdapter(new GameAdapter(arrayList1,GameActivity.this,i,this,randomArray()));
         check = false;
+
+        if(positionBuntton.getString("myuser","").equals("1")) {
+            tv_second_right.setText("0");
+        }else if(positionBuntton.getString("myuser","").equals("2")){
+            tv_second_right.setText("30");
+        }else{
+            tv_second_right.setText("5");
+        }
 
         new CountDownTimer(time, timeCountDownInterval) {
             @Override
@@ -144,8 +144,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             }
         }.start();
 
-
-
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
@@ -153,10 +151,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                         Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
     }
 
     // Tìm ID của một file nguồn trong thư mục 'raw' theo tên.
@@ -196,36 +190,55 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             };
 
     private void setData(){
-        for (int j = 0; j < 2; j++) {
-            for (int  u = 0;u < (4 * (i+1)) / 2; u++) {
-                arrayList1.add(mThumbIds[u]);
-                arrayList2.add(test[0]);
+        SharedPreferences positionMode = getSharedPreferences("myprefer", MODE_PRIVATE);
+        if (positionMode.getString("myuser", "").equals("1")) {
+            for (int j = 0; j < 2; j++) {
+                for (int  u = 0;u < (4 * (i+1)) / 2; u++) {
+                    arrayList1.add(mThumbIds[u]);
+                    arrayList2.add(test[0]);
+                }
+            }
+        } else {
+            for (int j = 0; j < 2; j++) {
+                for (int  u = 0;u < (8 * (i+1)) / 2; u++) {
+                    arrayList1.add(mThumbIds[u]);
+                    arrayList2.add(test[0]);
+                }
             }
         }
     }
 
     public ArrayList<Integer> randomArray() {
-        Random rand = new Random();
-        while (mang.size() < (4*(i+1))) {
-
-            int random = rand.nextInt((4*(i+1)));
-            if (!mang.contains(random)) {
-                mang.add(random);
+        SharedPreferences positionMode = getSharedPreferences("myprefer", MODE_PRIVATE);
+        if (positionMode.getString("myuser", "").equals("1")) {
+            Random rand = new Random();
+            while (mang.size() < (4*(i+1))) {
+                int random = rand.nextInt((4*(i+1)));
+                if (!mang.contains(random)) {
+                    mang.add(random);
+                }
             }
+            return mang;
+        } else {
+            Random rand = new Random();
+            while (mang.size() < (8*(i+1))) {
+                int random = rand.nextInt((8*(i+1)));
+                if (!mang.contains(random)) {
+                    mang.add(random);
+                }
+            }
+            return mang;
         }
-        return mang;
     }
 
     public void startTimer(int time) {
         new CountDownTimer(time, timeCountDownInterval) {
-
             public void onTick(long millisUntilFinished) {
                 tv_second_left.setText("" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
                 getCountUpTimer(Integer.MAX_VALUE);
-
             }
         }.start();
     }
@@ -236,17 +249,14 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
 
             public void onTick(long millisUntilFinished) {
                 SharedPreferences positionBuntton = getSharedPreferences("myprefer", MODE_PRIVATE);
-                if(positionBuntton.getString("myuser","").equals("1")) {
-                    tv_second_right.setText("0");
-                }else if(positionBuntton.getString("myuser","").equals("2")){
-                    tv_second_right.setText("0");
-                    if (up == 30) {
+                if(positionBuntton.getString("myuser","").equals("1")) {}
+                else if(positionBuntton.getString("myuser","").equals("2")){
+                    if (up == 29) {
                         dialogGameOver(GameActivity.this);
                         cTimer.cancel();
                     }
-                    tv_second_right.setText("30");
-                }else{
-                   if(add1 == 0) {
+                } else {
+                   if(add1 == 1) {
                        dialogGameOver(GameActivity.this);
                        cTimer.cancel();
                    }
@@ -274,7 +284,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 }
             }
 
-            if(position == pos){
+            if (position == pos){
                 compare = false;
             }
             if (compare) {
@@ -292,7 +302,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                     check = false;
                     if (arrayList2.equals(arrayList1)){
                         cTimer.cancel();
-                        Toast.makeText(GameActivity.this, "Your Score: " + up, Toast.LENGTH_SHORT).show();
                         switch (i) {
                             case 0:
                                 saveScore(1);
@@ -325,10 +334,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                                 saveScore(10);
                                 break;
                             default: saveScore(11);
-
                         }
-
-                    }else if (!arrayList1.get(mang.get(position)).equals(arrayList1.get(gan))) {
+                    } else if (!arrayList1.get(mang.get(position)).equals(arrayList1.get(gan))) {
                         new CountDownTimer(1300, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
@@ -339,7 +346,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                                 arrayList2.add(a, test[0]);
                                 arrayList2.remove(gan);
                                 arrayList2.add(gan, test[0]);
-                                Log.d("MISSION", "Number : " + arrayList2 + " : quangkhanhhahaha = ");
                                 gridview.setAdapter(new GameAdapter(arrayList2, GameActivity.this, i, GameActivity.this, mang));
                                 check =true;
                                 pos = -1;
@@ -356,7 +362,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 }
             }
         }
-
     }
 
     public void saveScore( int location){
@@ -459,6 +464,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     }
 
     public void dialogComplete(Context context) {
+        mediaPlayer.stop();
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     context);
@@ -469,7 +475,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             alertDialogBuilder.setCancelable(false);
             final AlertDialog dialog = alertDialogBuilder.create();
             Button btnGo = (Button) view.findViewById(R.id.btn_end);
-
 
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -487,6 +492,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     }
 
     public void dialogNewRecore(Context context) {
+        mediaPlayer.stop();
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     context);
@@ -506,7 +512,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             tvScore.setText("Score: "+up +"s");
             tvLevel.setText("Level "+(i+1));
 
-
             btnGo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -524,6 +529,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
     }
 
     public void dialogGameOver(Context context) {
+        mediaPlayer.stop();
         if (context instanceof Activity && !((Activity) context).isFinishing()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                     context);
@@ -534,10 +540,8 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
             alertDialogBuilder.setCancelable(false);
             final AlertDialog dialog = alertDialogBuilder.create();
 
-
             Button btnOK = (Button) view.findViewById(R.id.btn_ok);
             Button btnCancel = (Button) view.findViewById(R.id.btn_cancel);
-
 
             btnOK.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -571,7 +575,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
                 int tam = positionBuntton.getInt("level1", 0);
                 tam++;
                 editor.putInt("level1", tam);
-                Log.d("MISSION", "huhu Number : " + positionBuntton.getInt("level1", 0) + " : level1 = ");
             }
         }else if(positionBuntton.getString("myuser","").equals("2")){
             if(i == positionBuntton.getInt("level2",0)) {
@@ -598,7 +601,6 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         }else{
             option = "HARD";
         }
-
     }
 
     public void doStop(View view) {
@@ -611,6 +613,7 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         editor.putString("sound","2");
         editor.commit();
     }
+
     public void doStart(View view) {
         int songId = this.getRawResIdByName("song");
         this.mediaPlayer=   MediaPlayer.create(this, songId);
@@ -627,13 +630,11 @@ public class GameActivity extends AppCompatActivity implements GameAdapter.OnCli
         editor.commit();
     }
 
-
     @Override
     protected void onStop() {
         super.onStop();
         mediaPlayer.pause();
         diem = up;
-
     }
 
     @Override

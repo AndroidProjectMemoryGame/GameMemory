@@ -25,7 +25,11 @@ public class ListLevelAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return levelData.size();
+        if (levelData.size() < 11) {
+            return levelData.size();
+        }else{
+            return 10;
+        }
     }
 
     @Override

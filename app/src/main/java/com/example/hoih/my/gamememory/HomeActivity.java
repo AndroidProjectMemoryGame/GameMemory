@@ -20,7 +20,7 @@ public class HomeActivity extends Activity {
     Button btnNormal, btnNoLimitTime, btnHard;
     ArrayList<Integer> mang = new ArrayList<>();
     Intent shareIntent;
-    String shareBody = "https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf";
+    String shareBody = "Hi guy, We really happy when you use our app - Memory Game. We would like to make you happy after you are play this game. \n\n If you have any questions, fell free to contact us. We looking forward to hearing from you! \n\n Best regards, \n\n Memory Team";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,12 +69,12 @@ public class HomeActivity extends Activity {
     public void share(View view) {
         shareIntent = new Intent(android.content.Intent.ACTION_SEND);
         shareIntent.setType("text/pain");
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"My app");
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,shareBody);
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"[OUR APP - MEMORY GAME][MEMORY TEAM - HOIH MY, THI THAM, VAN KHANH, THANH TAM, THI AN]");
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(shareIntent,"Share via"));
     }
     public void moreGame(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=%3Cgame%3E&c=apps")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/search?q=game&c=apps")));
     }
 
 }

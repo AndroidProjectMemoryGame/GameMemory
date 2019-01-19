@@ -59,20 +59,19 @@ public class GameAdapter extends BaseAdapter {
                 buttonView.setLayoutParams(new ViewGroup.LayoutParams(130, 130));
             }
             else if(pos ==7){
-                buttonView.setLayoutParams(new ViewGroup.LayoutParams(110, 110));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(120, 120));
             }else if(pos == 8){
-                buttonView.setLayoutParams(new ViewGroup.LayoutParams(95, 95));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(115, 115));
             }else if(pos ==9){
-                buttonView.setLayoutParams(new ViewGroup.LayoutParams(75, 75));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(105, 105));
             }else {
-                buttonView.setLayoutParams(new ViewGroup.LayoutParams(50, 50));
+                buttonView.setLayoutParams(new ViewGroup.LayoutParams(100, 100));
             }
             buttonView.setBackgroundResource(R.drawable.border_game);
             buttonView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         } else {
             buttonView = (ImageButton) convertView;
         }
-
 
         buttonView.setImageResource(listData.get(mang.get(position)));
         buttonView.setOnClickListener(new View.OnClickListener() {
@@ -86,9 +85,7 @@ public class GameAdapter extends BaseAdapter {
         return buttonView;
     }
 
-
-
     public interface OnClickListener{
-        void Image  (int position);
+        void Image (int position);
     }
 }
